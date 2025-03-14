@@ -190,7 +190,7 @@ mobiles, jeux vidéos, etc.).
 
 ### Comment fonctionne PHP
 
-De façon plus précise, pour pour écrire et exécuter du code PHP, vous avez
+De façon plus précise, pour écrire et exécuter du code PHP, vous avez
 besoin de :
 
 - Un serveur web (Apache, Nginx, etc.)

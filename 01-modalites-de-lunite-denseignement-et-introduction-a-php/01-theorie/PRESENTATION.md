@@ -466,7 +466,7 @@ public static void main(String[] args) {
 - Les nombres sont déclarés sans guillemets.
 - Il existe deux types de nombres en PHP : les entiers et les flottants.
 - Les entiers sont des nombres entiers positifs ou négatifs.
-- Les flottants sont des nombres à virgule.
+- Les flottants sont des nombres à virgule, eux aussi, positifs ou négatifs.
 
 ![bg right:40%][illustration-les-nombres]
 
