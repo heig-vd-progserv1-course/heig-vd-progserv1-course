@@ -24,7 +24,7 @@
 
 TODO
 
-De façon plus précise, les objectifs de ce cours sont les suivants :
+De façon plus précise, les personnes qui étudient devraient être capables de :
 
 - TODO
 
@@ -52,4 +52,3 @@ renforcer votre compréhension des concepts vus en classe.
 Vous trouverez les détails des exercices ici :
 [Énoncés et solutions](../03-exercices/README.md).
 
-[^example]: Example, [example.com](https://example.com/), 13 mars 2025

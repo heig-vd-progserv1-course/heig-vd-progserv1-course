@@ -34,11 +34,32 @@
 
 ## Objectifs
 
-TODO
+Les tableaux permettent de stocker plusieurs valeurs dans une seule variable.
 
-De façon plus précise, les objectifs de ce cours sont les suivants :
+En utilisant les tableaux, il nous est possible de stocker des collections de
+données, comme une liste de noms, une liste de nombres, tout comme une liste de tableaux.
 
-- TODO
+Ces tableaux permettent de stocker des données structurées et d'y accéder de
+manière plus intuitive.
+
+Les boucles permettent de parcourir ces tableaux ou ces collections de données.
+
+En utilisant les boucles, il nous est possible de parcourir un tableau et
+d'afficher chaque élément du tableau et de les afficher.
+
+Les tableaux et les boucles sont des concepts fondamentaux en programmation et
+sont utilisés dans de nombreux programmes et applications, notamment pour stocker et parcourir une collection d'animaux de compagnie.
+
+De façon plus précise, les personnes qui étudient devraient être capables de :
+
+- Décrire les tableaux et leurs caractéristiques
+- Décrire la différence entre les tableaux indexés, les tableaux associatifs et les tableaux multidimensionnels
+- Utiliser les tableaux pour stocker des collections de données
+- Utiliser les fonctions de base pour travailler avec des tableaux
+- Utiliser les fonctions `print()` et `print_r()` pour afficher des informations sur les tableaux
+- Décrire ce qu'est une boucle et comment elle fonctionne
+- Décrire la différence entre les boucles `for`, `while`, `do...while` et `foreach`
+- Utiliser les boucles pour parcourir des tableaux ou des collections de données
 
 ## Les tableaux
 
@@ -303,6 +324,44 @@ foreach ($fruits as $fruit) {
     echo "$fruit<br>";
 }
 ```
+
+Avec des tableaux associatifs multidimensionnels, vous pouvez également utiliser
+deux variables pour parcourir les clés et les valeurs du tableau :
+
+```php
+<?php
+$users = [
+    'john' => [
+        'name' => 'John Doe',
+        'age' => 30,
+        'city' => 'New York',
+    ],
+    'jane' => [
+        'name' => 'Jane Doe',
+        'age' => 25,
+        'city' => 'Los Angeles',
+    ],
+];
+
+foreach ($users as $username => $user) {
+    echo "$username:<br>";
+    echo "Name: {$user['name']}<br>";
+    echo "Age: {$user['age']}<br>";
+    echo "City: {$user['city']}<br>";
+    echo "<br>";
+}
+```
+
+Dans cet exemple, nous avons un tableau `$users` qui contient des informations
+sur plusieurs utilisateurs. Nous utilisons une boucle `foreach` pour parcourir
+le tableau et afficher les informations de chaque utilisateur.
+
+La boucle `foreach` est très utile pour parcourir des tableaux ou des
+collections de données sans avoir à se soucier des indices ou des clés.
+
+La variable `$username` contient la clé (ou le nom) de l'élément du tableau, et
+la variable `$user` contient la valeur de l'élément du tableau, qui peut être un
+tableau associatif.
 
 ## Fonctions utiles pour les tableaux et les boucles
 

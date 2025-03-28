@@ -562,7 +562,7 @@ echo $x; // Affiche 1764
 public class Main {
     public static int x = 42;
 
-    public static int square() {
+    public static void square() {
         x = x * x;
     }
 

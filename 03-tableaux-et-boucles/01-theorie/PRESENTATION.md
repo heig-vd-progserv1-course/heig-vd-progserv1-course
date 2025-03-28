@@ -44,7 +44,14 @@ consultez le [support de cours][course-material]._
 
 ## Objectifs (1/3)
 
-- TODO
+- Décrire les tableaux et leurs caractéristiques
+- Décrire la différence entre les tableaux indexés, les tableaux associatifs et les tableaux multidimensionnels
+- Utiliser les tableaux pour stocker des collections de données
+- Utiliser les fonctions de base pour travailler avec des tableaux
+- Utiliser les fonctions `print()` et `print_r()` pour afficher des informations sur les tableaux
+- Décrire ce qu'est une boucle et comment elle fonctionne
+- Décrire la différence entre les boucles `for`, `while`, `do...while` et `foreach`
+- Utiliser les boucles pour parcourir des tableaux ou des collections de données
 
 ![bg right:40%][illustration-objectifs]
 

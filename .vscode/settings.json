@@ -1,4 +1,7 @@
 {
+	"[markdown]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
 	"[php]": {
 		"editor.defaultFormatter": "bmewburn.vscode-intelephense-client"
 	},
@@ -22,7 +25,8 @@
 		},
 		"no-emphasis-as-heading": false,
 		"no-hard-tabs": false,
-		"no-inline-html": false
+		"no-inline-html": false,
+		"no-trailing-punctuation": false
 	},
 	"plantuml.render": "PlantUMLServer",
 	"plantuml.server": "http://localhost:9090"
