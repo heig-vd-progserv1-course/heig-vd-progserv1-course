@@ -21,8 +21,9 @@ théoriques vus dans le cours _[Cours 02 - Fonctions](../01-theorie/README.md)_.
 - [Création du ficher `functions.php`](#création-du-ficher-functionsphp)
 - [Importer et utiliser les fonctions dans le fichier `index.php`](#importer-et-utiliser-les-fonctions-dans-le-fichier-indexphp)
 - [Créer les pages de base pour gérer les animaux de compagnie](#créer-les-pages-de-base-pour-gérer-les-animaux-de-compagnie)
-  - [Créer une page pour visualiser et modifier un animal de compagnie](#créer-une-page-pour-visualiser-et-modifier-un-animal-de-compagnie)
   - [Créer une page pour ajouter un animal de compagnie](#créer-une-page-pour-ajouter-un-animal-de-compagnie)
+  - [Créer une page pour visualiser un animal de compagnie](#créer-une-page-pour-visualiser-un-animal-de-compagnie)
+  - [Créer une page pour modifier un animal de compagnie](#créer-une-page-pour-modifier-un-animal-de-compagnie)
   - [Mettre à jour la page d'accueil](#mettre-à-jour-la-page-daccueil)
 - [Valider la structure de votre projet](#valider-la-structure-de-votre-projet)
 - [Solution](#solution)
@@ -204,31 +205,6 @@ compagnie de façon fictive, vous pouvez créer des pages pour gérer ces animau
 Pour le moment, ces pages ne seront que des squelettes pour les futures
 implémentations.
 
-### Créer une page pour visualiser et modifier un animal de compagnie
-
-Créez un fichier `view.php` dans le dossier `mini-projet`. Cette page permettra
-de visualiser et de mettre à jour un animal de compagnie.
-
-```php
-<!DOCTYPE html>
-<html lang="fr">
-
-<head>
-    <title>Visualise et modifie un animal de compagnie | Gestionnaire d'animaux de compagnie</title>
-</head>
-
-<body>
-    <h1>Visualise et modifie un animal de compagnie</h1>
-    <p><a href="index.php">Retour à l'accueil</a></p>
-    <p>Utilise cette page pour visualiser et modifier un animal de compagnie.</p>
-</body>
-
-</html>
-```
-
-Validez que la page `view.php` s'affiche correctement dans votre navigateur en
-allant à l'adresse <http://localhost/progserv1/mini-projet/view.php>.
-
 ### Créer une page pour ajouter un animal de compagnie
 
 Créez un fichier `create.php` dans le dossier `mini-projet`. Cette page
@@ -249,11 +225,60 @@ permettra d'ajouter un nouvel animal de compagnie.
 </body>
 
 </html>
-
 ```
 
 Validez que la page `create.php` s'affiche correctement dans votre navigateur en
 allant à l'adresse <http://localhost/progserv1/mini-projet/create.php>.
+
+### Créer une page pour visualiser un animal de compagnie
+
+Créez un fichier `view.php` dans le dossier `mini-projet`. Cette page permettra
+de visualiser un animal de compagnie.
+
+```php
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <title>Visualise un animal de compagnie | Gestionnaire d'animaux de compagnie</title>
+</head>
+
+<body>
+    <h1>Visualise un animal de compagnie</h1>
+    <p><a href="index.php">Retour à l'accueil</a></p>
+    <p>Utilise cette page pour visualiser un animal de compagnie.</p>
+</body>
+
+</html>
+```
+
+Validez que la page `view.php` s'affiche correctement dans votre navigateur en
+allant à l'adresse <http://localhost/progserv1/mini-projet/view.php>.
+
+### Créer une page pour modifier un animal de compagnie
+
+Créez un fichier `update.php` dans le dossier `mini-projet`. Cette page permettra
+de visualiser un animal de compagnie.
+
+```php
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <title>Modifie un animal de compagnie | Gestionnaire d'animaux de compagnie</title>
+</head>
+
+<body>
+    <h1>Modifie un animal de compagnie</h1>
+    <p><a href="index.php">Retour à l'accueil</a></p>
+    <p>Utilise cette page pour modifier un animal de compagnie.</p>
+</body>
+
+</html>
+```
+
+Validez que la page `update.php` s'affiche correctement dans votre navigateur en
+allant à l'adresse <http://localhost/progserv1/mini-projet/update.php>.
 
 ### Mettre à jour la page d'accueil
 
@@ -356,7 +381,5 @@ loin. Vous pouvez la sauter si vous n'avez pas de temps._
 
 - Comment pourriez-vous modifier les fonctions pour qu'elles retournent des
   valeurs plutôt que d'afficher des messages ?
-
-```
-
-```
+- Comment pourriez-vous modifier les fonctions pour qu'elles utilisent des
+  paramètres par défaut pour l'âge des animaux ?
