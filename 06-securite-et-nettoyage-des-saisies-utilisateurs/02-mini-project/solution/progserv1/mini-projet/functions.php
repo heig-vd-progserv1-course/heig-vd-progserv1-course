@@ -1,20 +1,20 @@
 <?php
-// On inclut le fichier de configuration de la base de données
-require 'database.php';
+// Inclusion du fichier de connexion à la base de données
+require './database.php';
 
 function getPets() {
-    // On utilise le mot-clé `global` pour accéder à la variable `$pets`.
+    // On utilise le mot-clé `global` pour accéder à la variable `$pdo`.
     // Même si c'est une mauvaise pratique, c'est nécessaire ici.
     global $pdo;
 
-    // On prépare la requête SQL pour récupérer tous les animaux
-    $stmt = $pdo->prepare("SELECT * FROM pets");
-
-    // On exécute la requête
-    $stmt->execute();
+    // On définit la requête SQL pour récupérer tous les animaux
+    $sql = "SELECT * FROM pets";
 
     // On récupère tous les animaux
-    $pets = $stmt->fetchAll();
+    $pets = $pdo->query($sql);
+
+    // On transforme le résultat en tableau associatif
+    $pets = $pets->fetchAll();
 
     // On transforme la chaîne `personalities` en tableau pour chaque animal
     foreach ($pets as &$pet) {
@@ -23,26 +23,23 @@ function getPets() {
         }
     }
 
-    // On retourne tous les animaux.
+    // On retourne tous les animaux
     return $pets;
 }
 
 function getPet($id) {
-    // On utilise le mot-clé `global` pour accéder à la variable `$pets`.
+    // On utilise le mot-clé `global` pour accéder à la variable `$pdo`.
     // Même si c'est une mauvaise pratique, c'est nécessaire ici.
     global $pdo;
 
-    // On prépare la requête SQL pour récupérer un animal par son identifiant
-    $stmt = $pdo->prepare("SELECT * FROM pets WHERE id = :id");
+    // On définit la requête SQL pour récupérer un animal
+    $sql = "SELECT * FROM pets WHERE id = '$id'";
 
-    // On lie le paramètre `:name` à la valeur de `$name`
-    $stmt->bindParam(':id', $id);
+    // On récupère l'animal spécifique
+    $pet = $pdo->query($sql);
 
-    // On exécute la requête
-    $stmt->execute();
-
-    // On récupère l'animal
-    $pet = $stmt->fetch();
+    // On transforme le résultat en tableau associatif
+    $pet = $pet->fetch();
 
     // On transforme la chaîne `personalities` en tableau si elle existe
     if ($pet && !empty($pet['personalities'])) {
@@ -64,29 +61,38 @@ function addPet(
     $size,
     $notes
 ) {
-    // On utilise le mot-clé `global` pour accéder à la variable `$pets`.
+    // On utilise le mot-clé `global` pour accéder à la variable `$pdo`.
     // Même si c'est une mauvaise pratique, c'est nécessaire ici.
     global $pdo;
-
-    // On prépare la requête SQL pour ajouter un animal
-    $stmt = $pdo->prepare("INSERT INTO pets (name, species, nickname, sex, age, color, personalities, size, notes) VALUES (:name, :species, :nickname, :sex, :age, :color, :personalities, :size, :notes)");
 
     // On transforme le tableau `$personalities` en chaîne de caractères avec `implode`
     $personalitiesAsString = implode(',', $personalities);
 
-    // On lie les paramètres `:name` et `:age` aux valeurs de `$name` et `$age`
-    $stmt->bindParam(':name', $name);
-    $stmt->bindParam(':species', $species);
-    $stmt->bindParam(':nickname', $nickname);
-    $stmt->bindParam(':sex', $sex);
-    $stmt->bindParam(':age', $age);
-    $stmt->bindParam(':color', $color);
-    $stmt->bindParam(':personalities', $personalitiesAsString);
-    $stmt->bindParam(':size', $size);
-    $stmt->bindParam(':notes', $notes);
+    // On définit la requête SQL pour ajouter un animal
+    $sql = "INSERT INTO pets (
+        name,
+        species,
+        nickname,
+        sex,
+        age,
+        color,
+        personalities,
+        size,
+        notes
+    ) VALUES (
+        '$name',
+        '$species',
+        '$nickname',
+        '$sex',
+        $age,
+        '$color',
+        '$personalitiesAsString',
+        $size,
+        '$notes'
+    )";
 
-    // On exécute la requête
-    $stmt->execute();
+    // On exécute la requête SQL pour ajouter un animal
+    $pdo->exec($sql);
 
     // On récupère l'identifiant de l'animal ajouté
     $petId = $pdo->lastInsertId();
@@ -95,42 +101,28 @@ function addPet(
     return $petId;
 }
 
-function updatePet(
-    $id,
-    $name,
-    $species,
-    $nickname,
-    $sex,
-    $age,
-    $color,
-    $personalities,
-    $size,
-    $notes
-) {
-    // On utilise le mot-clé `global` pour accéder à la variable `$pdo`.
+function updatePet($name, $age) {
+    // On utilise le mot-clé `global` pour accéder à la variable `$pets`.
     // Même si c'est une mauvaise pratique, c'est nécessaire ici.
-    global $pdo;
+    global $pets;
 
-    // On prépare la requête SQL pour mettre à jour les détails d'un animal
-    $stmt = $pdo->prepare("UPDATE pets SET name = :name, species = :species, nickname = :nickname, sex = :sex, age = :age, color = :color, personalities = :personalities, size = :size, notes = :notes WHERE id = :id");
+    // On vérifie si l'animal existe bien...
+    if (array_key_exists($name, $pets)) {
+        // ...si l'animal existe, on le récupère.
+        $pet = $pets[$name];
 
-    // On transforme le tableau `$personalities` en chaîne de caractères avec `implode`
-    $personalitiesAsString = implode(',', $personalities);
+        // On met à jour l'âge de l'animal.
+        $pet['age'] = $age;
 
-    // On lie les paramètres aux valeurs correspondantes
-    $stmt->bindParam(':id', $id);
-    $stmt->bindParam(':name', $name);
-    $stmt->bindParam(':species', $species);
-    $stmt->bindParam(':nickname', $nickname);
-    $stmt->bindParam(':sex', $sex);
-    $stmt->bindParam(':age', $age);
-    $stmt->bindParam(':color', $color);
-    $stmt->bindParam(':personalities', $personalitiesAsString);
-    $stmt->bindParam(':size', $size);
-    $stmt->bindParam(':notes', $notes);
+        // On met à jour l'animal dans le tableau `$pets`.
+        $pets[$name] = $pet;
 
-    // On exécute la requête et la retourne pour confirmer la mise à jour
-    return $stmt->execute();
+        // On retourne l'animal mis à jour.
+        return $pet;
+    } else {
+        // ...si l'animal n'existe pas, on retourne `false`.
+        return false;
+    }
 }
 
 function removePet($id) {
@@ -138,12 +130,9 @@ function removePet($id) {
     // Même si c'est une mauvaise pratique, c'est nécessaire ici.
     global $pdo;
 
-    // On prépare la requête SQL pour supprimer un animal par son identifiant
-    $stmt = $pdo->prepare("DELETE FROM pets WHERE id = :id");
+    // On définit la requête SQL pour supprimer un animal
+    $sql = "DELETE FROM pets WHERE id = '$id'";
 
-    // On lie le paramètre `:id` à la valeur de `$id`
-    $stmt->bindParam(':id', $id);
-
-    // On exécute la requête et retourne le résultat pour confirmer la suppression
-    return $stmt->execute();
+    // On exécute la requête SQL pour supprimer un animal
+    return $pdo->exec($sql);
 }

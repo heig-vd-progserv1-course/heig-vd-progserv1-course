@@ -17,8 +17,10 @@ _[Cours 06 - Sécurité et nettoyage des saisies utilisateurs](../01-theorie/REA
 ## Table des matières
 
 - [Ressources](#ressources)
-- [Tables des matières](#table-des-matières)
+- [Table des matières](#table-des-matières)
 - [Objectifs de la session](#objectifs-de-la-session)
+- [Implications de sécurité](#implications-de-sécurité)
+  - [Injections SQL](#injections-sql)
 - [Solution](#solution)
 - [Conclusion](#conclusion)
 - [Aller plus loin](#aller-plus-loin)
@@ -29,53 +31,9 @@ _[Cours 06 - Sécurité et nettoyage des saisies utilisateurs](../01-theorie/REA
 
 - TODO
 
-## Intégration de PDO
+## Réaliser une injection SQL
 
-### Création du fichier `database.php`
-
-### Création de la base de données pour les animaux de compagnie
-
-### Installation de l'extension SQLite
-
-### Visualisation du continu de la base de données
-
-## Gestion des animaux de compagnie
-
-### Récupération de tous les animaux de compagnie
-
-#### Mise à jour du fichier `functions.php`
-
-#### Mise à jour de l'interface utilisateur
-
-### Récupération d'un animal de compagnie
-
-#### Mise à jour du fichier `functions.php`
-
-#### Mise à jour de l'interface utilisateur
-
-### Création d'un animal de compagnie
-
-#### Mise à jour du fichier `functions.php`
-
-#### Mise à jour de l'interface utilisateur
-
-### Mise à jour d'un animal de compagnie
-
-#### Mise à jour du fichier `functions.php`
-
-#### Mise à jour de l'interface utilisateur
-
-### Suppression d'un animal de compagnie
-
-#### Mise à jour du fichier `functions.php`
-
-#### Mise à jour de l'interface utilisateur
-
-## Gestion des animaux de compagnie
-
-### Créer
-
-## Récupérer l'animal en base de données
+## Réaliser une attaque XSS
 
 ## Solution
 
