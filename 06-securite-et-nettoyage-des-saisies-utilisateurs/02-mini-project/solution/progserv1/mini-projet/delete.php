@@ -10,7 +10,9 @@ if (isset($_GET["id"])) {
     removePet($petId);
 
     header("Location: index.php");
+    exit();
 } else {
     // Si l'ID n'est pas passé dans l'URL, on redirige vers la page d'accueil
     header("Location: index.php");
+    exit();
 }
