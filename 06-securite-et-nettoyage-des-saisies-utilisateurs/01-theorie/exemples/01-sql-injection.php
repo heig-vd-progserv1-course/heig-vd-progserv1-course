@@ -1,6 +1,19 @@
 <?php
 // Constante pour le fichier de base de données SQLite
-const DATABASE_FILE = './users.db';
+const DATABASE_FILE = "./users.db";
+
+// Connexion à la base de données
+$pdo = new PDO("sqlite:" . DATABASE_FILE);
+
+// Création d'une table `users`
+$sql = "CREATE TABLE IF NOT EXISTS users (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    email TEXT NOT NULL UNIQUE,
+    password TEXT NOT NULL
+)";
+
+// On exécute la requête SQL pour créer la table
+$pdo->exec($sql);
 
 // Gère la soumission du formulaire
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -8,23 +21,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = $_POST["email"];
     $password = $_POST["password"];
 
-    // Connexion à la base de données
-    $pdo = new PDO("sqlite:" . DATABASE_FILE);
-
-    // Création d'une table `users`
-    $sql = 'CREATE TABLE IF NOT EXISTS users (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        email TEXT NOT NULL UNIQUE,
-        password TEXT NOT NULL
-    )';
-
-    // On exécute la requête SQL pour créer la table
-    $pdo->exec($sql);
-
     // On prépare la requête SQL pour ajouter un utilisateur
-    $sql = "INSERT INTO users ( email, password ) VALUES ('$email', '$password')";
-
-    echo $sql;
+    $sql = "INSERT INTO users (email, password) VALUES ('$email', '$password')";
 
     // On exécute la requête SQL pour ajouter l'utilisateur
     $pdo->exec($sql);
@@ -41,6 +39,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <body>
     <h1>Création d'un compte</h1>
+    <a href="02-xss.php"><button>Voir les comptes</button></a>
+
     <form action="01-sql-injection.php" method="POST">
         <label for="email">E-mail :</label><br>
         <input
@@ -52,7 +52,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         <label for="password">Mot de passe :</label><br>
         <input
-            type="text"
+            type="password"
             id="password"
             name="password" />
 

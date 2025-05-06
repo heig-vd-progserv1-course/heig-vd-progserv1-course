@@ -147,18 +147,18 @@ plus courants sont :
 
 ### Injections SQL
 
-Les injections SQL sont une technique d'attaque qui permet à un attaquant
-d'injecter du code SQL malveillant dans une requête SQL. Cela peut entraîner des
-fuites de données, des modifications non autorisées de données ou même la
-suppression de données.
+Les injections SQL sont une technique d'attaque qui permet à une personne qui
+attaquerait votre application d'injecter du code SQL malveillant dans une
+requête SQL. Cela peut entraîner des fuites de données, des modifications non
+autorisées de données ou même la suppression de données.
 
 Les injections SQL se produisent généralement lorsque les entrées utilisateur ne
 sont pas correctement filtrées ou échappées avant d'être utilisées dans une
 requête SQL. Par exemple, si une application web permet à un utilisateur de
 fournir un nom d'utilisateur et un mot de passe, et que ces valeurs sont
-directement insérées dans une requête SQL sans être échappées, un attaquant
-pourrait entrer une chaîne de caractères malveillante qui modifie la requête SQL
-pour exécuter des actions non autorisées.
+directement insérées dans une requête SQL sans être échappées, une personne
+attaquante pourrait entrer une chaîne de caractères malveillante qui modifie la
+requête SQL pour exécuter des actions non autorisées.
 
 Voici un exemple de code PHP vulnérable aux injections SQL :
 
@@ -176,7 +176,20 @@ Voici un exemple de code PHP vulnérable aux injections SQL :
 ```php
 <?php
 // Constante pour le fichier de base de données SQLite
-const DATABASE_FILE = './users.db';
+const DATABASE_FILE = "./users.db";
+
+// Connexion à la base de données
+$pdo = new PDO("sqlite:" . DATABASE_FILE);
+
+// Création d'une table `users`
+$sql = "CREATE TABLE IF NOT EXISTS users (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    email TEXT NOT NULL UNIQUE,
+    password TEXT NOT NULL
+)";
+
+// On exécute la requête SQL pour créer la table
+$pdo->exec($sql);
 
 // Gère la soumission du formulaire
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -184,27 +197,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = $_POST["email"];
     $password = $_POST["password"];
 
-    // Connexion à la base de données
-    $pdo = new PDO("sqlite:" . DATABASE_FILE);
-
-    // Création d'une table `users`
-    $sql = 'CREATE TABLE IF NOT EXISTS users (
-        id INTEGER PRIMARY KEY AUTOINCREMENT,
-        email TEXT NOT NULL UNIQUE,
-        password TEXT NOT NULL
-    )';
-
-    // On exécute la requête SQL pour créer la table
-    $pdo->exec($sql);
-
     // On prépare la requête SQL pour ajouter un utilisateur
-    $sql = "INSERT INTO users (
-        email,
-        password
-    ) VALUES (
-        '$email',
-        '$password'
-    )";
+    $sql = "INSERT INTO users (email, password) VALUES ('$email', '$password')";
 
     // On exécute la requête SQL pour ajouter l'utilisateur
     $pdo->exec($sql);
@@ -232,7 +226,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         <label for="password">Mot de passe :</label><br>
         <input
-            type="text"
+            type="password"
             id="password"
             name="password" />
 
@@ -250,59 +244,134 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 ```
 
 Dans cet exemple, les valeurs de `$email` et `$password` sont directement
-insérées dans la requête SQL sans être échappées. Cela signifie qu'un attaquant
-pourrait entrer une chaîne de caractères malveillante dans le champ `email` ou
-`password` qui modifierait la requête SQL pour exécuter des actions non
-autorisées.
+insérées dans la requête SQL sans être échappées. Cela signifie qu'une personne
+attaquante pourrait entrer une chaîne de caractères malveillante dans le champ
+`email` ou `password` qui modifierait la requête SQL pour exécuter des actions
+non autorisées.
 
-Par exemple, un attaquant pourrait entrer les valeurs suivantes dans le
-formulaire :
+Par exemple, une personne attaquante pourrait entrer les valeurs suivantes dans
+le formulaire :
 
-- Pour le champ `email` : `', ''); DROP TABLE users; ---`
-- Pour le champ `password` : `password`
+- Pour le champ `email` : `me@example.com`
+- Pour le champ `password` : `'); DROP TABLE users; --`
 
 Cela modifierait la requête SQL pour qu'elle ressemble à ceci :
 
 ```sql
-INSERT INTO users (email, password) VALUES ('' OR 1=1; DROP TABLE users; --', 'password')
+INSERT INTO users (email, password) VALUES ('me@example.com', ''); DROP TABLE users; --'
 ```
 
 Dans cet exemple, la requête SQL serait modifiée pour exécuter deux instructions
 SQL :
 
-1. `INSERT INTO users (email, password) VALUES ('', 'password')` : cela
-   insérerait un nouvel utilisateur avec un e-mail vide et le mot de passe
-   `password`.
-2. `DROP TABLE users` : cela supprimerait la table `users` de la base de
-   données.
+1. `INSERT INTO users (email, password) VALUES ('email@example.com', '');` :
+   cela insérera un nouvel utilisateur avec l'adresse e-mail
+2. `DROP TABLE users;` : cela supprimera la table `users` de la base de données.
 
-Cela signifie que l'attaquant pourrait supprimer la table `users` de la base de
-données, ce qui entraînerait la perte de toutes les données de la table. Il est
-donc important de toujours valider et nettoyer les saisies utilisateurs avant de
-les utiliser dans une requête SQL. Cela garantit que seules les données valides
-et sûres sont utilisées dans l'application.
+Les points-virgules (`;`) séparent les requêtes SQL entre elles. Les traits
+d'union ( `--`) sont un commentaire SQL. Ce qui indique que tout ce qui suit ne
+sera donc pas exécuté.
+
+Au travers de cette injection SQL, la personne attaquante a réussi à exécuter
+deux instructions SQL au travers d'un champ de saisie, supprimant ainsi la table
+`users` de la base de données.
+
+D'autres attaques par injection SQL pourraient également être réalisées, comme
+la modification des données d'un utilisateur ou l'extraction de données
+sensibles de la base de données.
+
+Il est donc important de toujours valider et nettoyer les saisies utilisateurs
+avant de les utiliser dans une requête SQL. Cela garantit que seules les données
+valides et sûres sont utilisées dans l'application.
 
 ### Attaques XSS
 
 Les attaques XSS (Cross-Site Scripting) sont une technique d'attaque qui permet
-à un attaquant d'injecter du code JavaScript malveillant dans une page web. Cela
-peut entraîner des fuites de données, des modifications non autorisées de
-données ou même la redirection de l'utilisateur vers un site malveillant.
+à une personne attaquante d'injecter du code JavaScript malveillant dans une
+page web. Cela peut entraîner des fuites de données, des modifications non
+autorisées de données ou même la redirection de l'utilisateur vers un site
+malveillant.
 
 Tout comme les injections SQL, les attaques XSS se produisent généralement
 lorsque les entrées utilisateur ne sont pas correctement filtrées ou échappées
 avant d'être affichées dans une page web. Par exemple, si une application web
 permet à un utilisateur de fournir un commentaire, et que ce commentaire est
-directement affiché dans une page web sans être échappé, un attaquant pourrait
-entrer une chaîne de caractères malveillante qui injecte du code JavaScript dans
-la page web.
+directement affiché dans une page web sans être échappé, une personne attaquante
+pourrait entrer une chaîne de caractères malveillante qui injecte du code
+JavaScript dans la page web.
 
-Comme vous n'avez pas encore étudié le JavaScript, nous ne nous attarderons pas
+Comme vous n'avez pas encore étudié JavaScript, nous ne nous attarderons pas
 trop en détail sur ce type d'attaques. Cependant, il est important de garder à
 l'esprit que les attaques XSS sont une menace sérieuse pour la sécurité des
 applications web et que les principes de sécurité que vous apprendrez dans ce
 mini-projet s'appliquent également à la prévention des attaques XSS.
 
+En se basant sur l'exemple précédent, voici un exemple de code PHP vulnérable
+aux attaques XSS :
+
+> [!CAUTION]
+>
+> **Attention** : ce code est vulnérable aux attaques XSS et ne respecte pas les
+> bonnes pratiques pour afficher les données dans une page web.
+>
+> **Ce code ne doit pas être utilisé dans une application réelle**. Il est
+> uniquement fourni à titre d'exemple.
+
+````php
+<?php
+// Constante pour le fichier de base de données SQLite
+const DATABASE_FILE = './users.db';
+
+    // Connexion à la base de données
+    $pdo = new PDO("sqlite:" . DATABASE_FILE);
+
+    // Création d'une table `users`
+    $sql = 'SELECT * FROM users';
+
+    // On exécute la requête SQL pour récupérer les utilisateurs
+    $users = $pdo->query($sql);
+
+    // On transforme le résultat en tableau
+    $users = $users->fetchAll();
+?>
+
+<!-- Gère l'affichage du formulaire -->
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Affichage de tous les utilisateurs</title>
+</head>
+
+<body>
+    <h1>Création d'un compte</h1>
+    <form action="register.php" method="POST">
+        <label for="email">E-mail :</label><br>
+        <input
+            type="email"
+            id="email"
+            name="email" />
+
+        <br>
+
+        <label for="password">Mot de passe :</label><br>
+        <input
+            type="password"
+            id="password"
+            name="password" />
+
+        <br>
+
+        <button type="submit">Envoyer</button>
+    </form>
+
+    <?php if ($_SERVER["REQUEST_METHOD"] == "POST") { ?>
+        <p>Le formulaire a été soumis avec succès.</p>
+    <?php } ?>
+</body>
+
+</html>
+```
 ## Se prémunir conte les injections SQL et les attaques XSS
 
 Pour se protéger contre les injections SQL et les attaques XSS, il est important
@@ -330,17 +399,22 @@ paramètres sont ensuite liés aux valeurs réelles avant d'exécuter la requêt
 Voici un exemple de requête préparée :
 
 ```php
-// On prépare la requête SQL
+// On définit la requête SQL avec des paramètres
 $sql = "SELECT * FROM users WHERE username = :username AND password = :password";
+
+// On prépare la requête SQL
 $stmt = $pdo->prepare($sql);
+
 // On lie les paramètres aux valeurs réelles
 $stmt->bindParam(':username', $username);
 $stmt->bindParam(':password', $password);
+
 // On exécute la requête
 $stmt->execute();
-// On récupère les résultats
+
+// On récupère les résultats comme préalablement
 $results = $stmt->fetchAll();
-```
+````
 
 Dans cet exemple, les valeurs de `$username` et `$password` sont liées aux
 paramètres `:username` et `:password` dans la requête SQL. Cela garantit que les
@@ -352,6 +426,19 @@ requêtes préparées et des instructions paramétrées lors de l'interaction av
 une base de données. Cela garantit que les entrées utilisateur sont correctement
 échappées et que le code SQL malveillant ne peut pas être injecté dans la
 requête.
+
+### Échapper les données
+
+Pour éviter les attaques XSS, il est important d'échapper les données avant de
+les afficher dans une page web. Cela garantit que le code JavaScript malveillant
+ne peut pas être injecté dans la page web. Voici un exemple de code PHP qui
+utilise la fonction `htmlspecialchars` pour échapper les caractères spéciaux
+dans une chaîne de caractères avant de l'afficher dans une page web :
+
+```php
+Il est donc important de toujours valider et nettoyer les saisies utilisateurs
+avant de les utiliser dans une requête SQL. Cela garantit que seules les données
+valides et sûres sont utilisées dans l'application.
 
 ## Conclusion
 
@@ -372,3 +459,4 @@ renforcer votre compréhension des concepts vus en classe.
 
 Vous trouverez les détails des exercices ici :
 [Énoncés et solutions](../03-exercices/README.md).
+```

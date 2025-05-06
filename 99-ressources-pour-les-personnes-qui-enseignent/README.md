@@ -62,33 +62,31 @@ Merci pour votre collaboration !
 
 #### Questions
 
-- L'unité d'enseignement est (boutons radio)
-  - Trop théorique
-  - Adapté
-  - Trop pratique
-- Le rythme de l'unité d'enseignement est (boutons radio)
-  - Trop lent
-  - Adapté
-  - Trop rapide
-- Les contenus (supports, présentations, consignes, énoncés, etc.) sont (boutons
-  radio)
-  - Trop simples
-  - Adaptés
-  - Trop complexes
-- Les mini-projets sont (boutons radio)
-  - Trop simples
-  - Adaptés
-  - Trop complexes
-- Les exercices sont (boutons radio)
-  - Trop simples
-  - Adaptés
-  - Trop complexes
-- J'ai l'impression d'avoir appris des éléments qui me seront utiles dans ma
-  formation et pour mon futur (boutons radio)
-  - Non
-  - Plutôt non
-  - Plutôt oui
-  - Oui
+- Pour chacune de ces affirmations, sélectionnez l'option qui reflète le mieux
+  votre ressenti à propos de cette unité d'enseignement (grille)
+
+  - Description : N'hésitez pas à partager librement votre ressenti sur cette
+    unité d'enseignement. Si elle ne vous a pas satisfait, vos retours sont
+    précieux pour nous aider à nous améliorer. Vous pouvez également formuler
+    des commentaires plus spécifiques dans la section « Autres remarques et
+    commentaires », si vous le souhaitez.
+  - Options :
+
+    | Option                                                                                                                                                                                                                              | Pas du tout d'accord | Pas d'accord | Plutôt d'accord | Tout à fait d'accord |
+    | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------- | ------------ | --------------- | -------------------- |
+    | Les attentes et les objectifs sont clairement définis                                                                                                                                                                               |                      |              |                 |                      |
+    | Les moments de théorie courts sont adaptés                                                                                                                                                                                          |                      |              |                 |                      |
+    | Les mini-projets sont adaptés à mon niveau                                                                                                                                                                                          |                      |              |                 |                      |
+    | Les exercices sont adaptés à mon niveau                                                                                                                                                                                             |                      |              |                 |                      |
+    | Le temps nécessaire pour réaliser les mini-projets et exercices est adapté                                                                                                                                                          |                      |              |                 |                      |
+    | Les contenus (supports, présentations, consignes, énoncés, etc.) sont compréhensibles et bien rédigés                                                                                                                               |                      |              |                 |                      |
+    | Les contenus (supports, présentations, consignes, énoncés, etc.) me permettent de travailler/réviser de façon autonome                                                                                                              |                      |              |                 |                      |
+    | Les présentations orales sont utiles et permettent de mieux comprendre la matière                                                                                                                                                   |                      |              |                 |                      |
+    | L'unité d'enseignement est variée, dynamique et motivante                                                                                                                                                                           |                      |              |                 |                      |
+    | Le corps enseignant est à l'écoute et répond à mes questions de façon respectueuse                                                                                                                                                  |                      |              |                 |                      |
+    | Les éléments abordés me seront utiles dans ma formation et pour mon futur                                                                                                                                                           |                      |              |                 |                      |
+    | J'aurais plaisir à suivre une unité d'enseignement qui reprend la même méthode d'enseignement que celle-ci (moments de théorie courts, axé sur la pratique, supports de cours qui permettent de travailler de façon autonome, etc.) |                      |              |                 |                      |
+
 - J'ai eu des difficultés à comprendre les sujets suivants (cases à cocher)
   - Introduction à PHP
   - Fonctions
@@ -98,17 +96,14 @@ Merci pour votre collaboration !
   - Sécurité et nettoyage des saisies utilisateurs
   - Programmation orientée objet
 - Inscription à un ou des cours d'appui (cases à cocher)
-  - Option : J'aimerais pouvoir avoir un ou des cours d'appui
   - Description : Si nous voyons qu'il y a des personnes intéressées, une date
     sera fixée prochainement avec l'aide de Daniela et une invitation par e-mail
     vous sera envoyée (dans la mesure du possible ; il n'est pas garanti qu'il
     soit possible d'organiser ces cours d'appui).
-- J'ai moins apprécié et je propose... (zone de texte)
+  - Option : J'aimerais pouvoir avoir un ou des cours d'appui
 - J'ai particulièrement apprécié... (zone de texte)
+- J'ai moins apprécié et je propose... (zone de texte)
 - Autres remarques et commentaires (zone de texte)
-  - Description: Sentez-vous libre d'exprimer votre ressenti sur l'unité
-    d'enseignement. Si celui-ci vous a déplu, n'hésitez pas à nous le faire
-    savoir pour que nous puissions faire mieux dans le futur.
 
 ### Message envoyé aux personnes qui étudient avant chaque cours
 
