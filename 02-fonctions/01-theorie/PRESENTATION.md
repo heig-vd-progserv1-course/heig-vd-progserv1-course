@@ -588,8 +588,7 @@ Est-ce que vous avez des questions ?
 - Poser des questions si nécessaire.
 
 \
-\
-**Entraidez-vous si vous avez des difficultés !**
+**Pour le mini-projet ou les exercices, n'hésitez pas à vous entraidez si vous avez des difficultés !**
 
 ![bg right:40%][illustration-a-vous-de-jouer]
 

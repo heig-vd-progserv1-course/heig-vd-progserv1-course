@@ -12,6 +12,7 @@ if (isset($_GET["id"])) {
     // Si l'animal n'existe pas, on redirige vers la page d'accueil
     if (!$pet) {
         header("Location: index.php");
+        exit();
     } else {
         // Sinon, on initialise les variables
         $id = $pet['id'];
@@ -99,6 +100,7 @@ if (isset($_GET["id"])) {
         if ($success) {
             // On redirige vers la page de l'animal modifié
             header("Location: view.php?id=$id");
+            exit();
         } else {
             // Si la mise à jour a échoué, on affiche un message d'erreur
             $errors[] = "La mise à jour a échoué.";
@@ -107,6 +109,7 @@ if (isset($_GET["id"])) {
 } else {
     // Si l'ID n'est pas passé dans l'URL, on redirige vers la page d'accueil
     header("Location: index.php");
+    exit();
 }
 ?>
 

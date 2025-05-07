@@ -12,10 +12,12 @@ if (isset($_GET["id"])) {
     // Si l'animal n'existe pas, on redirige vers la page d'accueil
     if (!$pet) {
         header("Location: index.php");
+        exit();
     }
 } else {
     // Si l'ID n'est pas passé dans l'URL, on redirige vers la page d'accueil
     header("Location: index.php");
+    exit();
 }
 ?>
 
@@ -223,13 +225,8 @@ if (isset($_GET["id"])) {
 
         <a href="delete.php?id=<?= $pet["id"] ?>">
             <button type="button">Supprimer</button>
-        </a><br>
-        <a href="edit.php?id=<?= $pet["id"] ?>">
-            <button type="button">Modifier</button>
         </a>
     </form>
 </body>
 
 </html>
-
-</head>

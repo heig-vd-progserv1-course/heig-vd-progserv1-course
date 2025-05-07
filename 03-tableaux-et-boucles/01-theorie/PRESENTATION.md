@@ -602,8 +602,9 @@ Est-ce que vous avez des questions ?
 - Faire les [exercices][exercices].
 - Poser des questions si nécessaire.
 
-**Que ce soit pour les exercices ou le mini-projet, nous vous encourageons à
-vous entraider si vous avez des difficultés !**
+\
+**Pour le mini-projet ou les exercices, n'hésitez pas à vous entraidez si vous avez
+des difficultés !**
 
 ![bg right:40%][illustration-a-vous-de-jouer]
 

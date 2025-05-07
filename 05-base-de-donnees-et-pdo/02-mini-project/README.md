@@ -45,7 +45,7 @@ animaux de compagnie qui sont stockés dans un tableau.
 
 A chaque fois que vous rechargez la page, le tableau est réinitialisé et les
 animaux de compagnie sont recréés en dur dans le code. Cela signifie que les
-données ne sont pas persistées (= conserver) et que vous perdez toutes les
+données ne sont pas persistées (= conservées) et que vous perdez toutes les
 données lorsque vous rechargez la page.
 
 Dans cette session, vous allez apprendre à persister (= conserver) les données
@@ -90,7 +90,7 @@ Créez un nouveau fichier `database.php` dans le dossier de votre projet.
 Votre structure de projet devrait ressembler à ceci :
 
 ```text
-./
+progserv1/
 ├── exercices/
 │   └── index.php
 ├── mini-projet/
@@ -162,6 +162,23 @@ Ouvrez votre navigateur et accédez à l'adresse
 Vous devriez voir la page d'accueil de votre application. Pour le moment, le
 comportement de l'application n'a pas changé mais vous devriez remarquer qu'un
 nouveau fichier `petsmanager.db` a été créé dans le dossier de votre projet.
+
+Votre structure de projet devrait ressembler à ceci :
+
+```text
+progserv1/
+├── exercices/
+│   └── index.php
+├── mini-projet/
+│   ├── create.php
+│   ├── database.php
+│   ├── functions.php
+│   ├── index.php
+│   ├── petsmanager.db
+│   └── view.php
+├── index.php
+└── phpinfo.php
+```
 
 Notre base de données SQLite a été créée avec succès !
 
@@ -1384,7 +1401,7 @@ Créez un nouveau fichier `delete.php`.
 Votre structure de projet devrait ressembler à ceci :
 
 ```text
-./
+progserv1/
 ├── exercices/
 │   └── index.php
 ├── mini-projet/
@@ -1393,6 +1410,7 @@ Votre structure de projet devrait ressembler à ceci :
 │   ├── delete.php
 │   ├── functions.php
 │   ├── index.php
+│   ├── petsmanager.db
 │   └── view.php
 ├── index.php
 └── phpinfo.php

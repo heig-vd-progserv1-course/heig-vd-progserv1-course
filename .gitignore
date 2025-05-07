@@ -1,6 +1,3 @@
-## SQLite databases
-*.db
-
 ## Linux
 
 # Temporary files
@@ -16,6 +13,9 @@
 # Outputs
 *.html
 *.pdf
+
+## SQLite databases
+*.db
 
 ## Windows
 

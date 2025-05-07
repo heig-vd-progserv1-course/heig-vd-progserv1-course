@@ -15,200 +15,495 @@
 - [Ressources](#ressources)
 - [Table des matières](#table-des-matières)
 - [Objectifs](#objectifs)
-- [Base de données](#base-de-données)
-  - [Rappel des bases](#rappel-des-bases)
-  - [Système de gestion de base de données (SGBD)](#système-de-gestion-de-base-de-données-sgbd)
-  - [SQLite](#sqlite)
-- [PDO](#pdo)
-  - [Connexion à une base de données SQLite](#connexion-à-une-base-de-données-sqlite)
-  - [Création d'une table](#création-dune-table)
-  - [Insertion de données](#insertion-de-données)
-  - [Récupération de données](#récupération-de-données)
+- [Validation et nettoyage des saisies utilisateurs](#validation-et-nettoyage-des-saisies-utilisateurs)
+- [Nettoyage des saisies utilisateurs](#nettoyage-des-saisies-utilisateurs)
+- [Implications de sécurité](#implications-de-sécurité)
+  - [Injections SQL](#injections-sql)
+  - [Attaques XSS](#attaques-xss)
+- [Se prémunir conte les injections SQL et les attaques XSS](#se-prémunir-conte-les-injections-sql-et-les-attaques-xss)
+  - [Requêtes préparées avec PDO](#requêtes-préparées-avec-pdo)
+  - [Échapper les données](#échapper-les-données)
 - [Conclusion](#conclusion)
 - [Mini-projet](#mini-projet)
 - [Exercices](#exercices)
 
 ## Objectifs
 
-TODO
+Jusqu'à présent, nous avons vu comment créer une base de données et interagir
+avec elle à l'aide de PHP et de PDO. Cependant, il est important de s'assurer
+que les données saisies par les utilisateurs sont sécurisées et valables avant
+de les insérer dans la base de données. Cela est particulièrement important pour
+éviter les attaques par injection SQL et les attaques XSS.
+
+Cette session vise à vous familiariser avec les concepts de sécurité et de
+nettoyage des saisies utilisateurs. Nous allons aborder les injections SQL et
+les attaques XSS, ainsi que les bonnes pratiques pour éviter ces types
+d'attaques.
 
 De façon plus précise, les personnes qui étudient devraient être capables de :
 
 - TODO
 
-## Base de données
+## Validation et nettoyage des saisies utilisateurs
 
-### Rappel des bases
+La validation et le nettoyage des saisies utilisateurs sont des étapes
+essentielles dans le développement d'applications web sécurisées. Ces étapes
+permettent de s'assurer que les données saisies par les utilisateurs sont
+valides, sûres et ne contiennent pas de code malveillant. Cela est
+particulièrement important lorsque les données saisies par les utilisateurs sont
+utilisées dans des requêtes SQL ou affichées dans des pages web.
 
-Pour rappel, une base de données est un ensemble d'informations organisées de
-manière à permettre un accès rapide et efficace à ces informations. Les bases de
-données sont utilisées pour stocker et gérer des données dans de nombreux
-domaines, notamment les applications web, les systèmes de gestion de contenu,
-les applications de commerce électronique, etc.
+La validation consiste à vérifier que les données saisies par les utilisateurs
+sont conformes à un ensemble de règles prédéfinies. Par exemple, si un champ
+doit contenir une adresse e-mail, la validation vérifiera que la valeur saisie
+est bien une adresse e-mail valide. Si la valeur saisie ne respecte pas les
+règles de validation, elle sera rejetée et l'utilisateur sera invité à corriger
+sa saisie.
 
-Les bases de données sont généralement organisées en tables, qui contiennent des
-lignes et des colonnes. Chaque ligne représente un enregistrement unique, tandis
-que chaque colonne représente un champ de données. Les tables peuvent être liées
-entre elles par des relations, ce qui permet de créer des bases de données plus
-complexes et de gérer des données interconnectées.
+Le nettoyage consiste à supprimer ou échapper les caractères spéciaux ou
+malveillants dans les données saisies par les utilisateurs. Cela permet de
+s'assurer que les données saisies ne contiennent pas de code malveillant qui
+pourrait être injecté dans une requête SQL ou exécuté dans une page web.
 
-### Système de gestion de base de données (SGBD)
+Jusqu'à présent, nous avons vu comment comment valider les saisies utilisateurs
+dans le
+[Cours 04 - Formulaires HTML et validation](../../04-formulaires-html-et-validation/01-theorie/README.md).
+Nous allons maintenant nous intéresser à la sécurité des saisies utilisateurs et
+aux attaques qui peuvent être réalisées si les saisies utilisateurs ne sont pas
+correctement validées et nettoyées.
 
-Un système de gestion de base de données (SGBD) (appelé _"database management
-system"_ ou _"DBMS"_ en anglais) est un logiciel qui permet de créer, gérer et
-interroger des bases de données. Il fournit une interface pour interagir avec
-les données, ainsi que des outils pour effectuer des opérations telles que la
-création de tables, l'insertion de données, la mise à jour de données et la
-suppression de données. Les SGBD sont utilisés pour gérer des bases de données
-de toutes tailles, allant des petites bases de données locales aux grandes bases
-de données distribuées.
+## Nettoyage des saisies utilisateurs
 
-Les systèmes de gestion de base de données les plus courants sont, entre autres,
-MySQL, PostgreSQL, SQLite et MongoDB.
+Le nettoyage des saisies utilisateurs consiste à supprimer ou échapper les
+caractères spéciaux ou malveillants dans les données saisies par les
+utilisateurs.
 
-Chacun de ces SGBD a ses propres caractéristiques et avantages, mais ils
-partagent tous des concepts de base communs.
+Le terme _"échapper"_ fait référence à la pratique de remplacer les caractères
+spéciaux par des séquences d'échappement qui sont interprétées comme des
+caractères littéraux plutôt que comme des caractères spéciaux. Par exemple, le
+caractère `<` est un caractère spécial en HTML qui est utilisé pour ouvrir une
+balise.
 
-### SQLite
+Si vous souhaitez afficher le caractère `<` dans une page web, vous devez
+l'échapper en utilisant la séquence d'échappement `&lt;`. Cela garantit que le
+caractère `<` est affiché comme un caractère littéral plutôt que comme le début
+d'une balise HTML.
 
-Dans le contexte de ce cours, nous allons utiliser SQLite comme SGBD.
+En PHP, la fonction
+[`htmlspecialchars`](https://www.php.net/manual/fr/function.htmlspecialchars.php)
+est utilisée pour échapper les caractères spéciaux dans une chaîne de
+caractères.
 
-SQLite est un SGBD léger et autonome qui est intégré dans de nombreuses
-applications et langages de programmation. Il est particulièrement adapté pour
-les applications de petite à moyenne taille, ainsi que pour les applications
-mobiles.
+Voici quelques exemples de caractères spéciaux et leurs séquences d'échappement
+en HTML :
 
-SQLite est une base de données locale qui est stockée dans un fichier unique sur
-le disque. Cela signifie qu'il n'est pas nécessaire d'installer un serveur de
-base de données séparé pour l'utiliser.
+| Caractère | Séquence d'échappement |
+| :-------- | :--------------------- |
+| `<`       | `&lt;`                 |
+| `>`       | `&gt;`                 |
+| `&`       | `&amp;`                |
+| `"`       | `&quot;`               |
+| `'`       | `&apos;`               |
 
-SQLite est donc facile à utiliser et ne nécessite pas de configuration complexe,
-ce qui en fait un excellent choix pour les développeurs qui souhaitent créer
-rapidement des applications avec une base de données.
+Une liste plus complète des caractères spéciaux et de leurs séquences
+d'échappement est disponible sur Wikipedia :
+[Liste des entités de caractère de XML et HTML](https://fr.wikipedia.org/wiki/Liste_des_entit%C3%A9s_de_caract%C3%A8re_de_XML_et_HTML).
 
-## PDO
-
-PDO (PHP Data Objects) est une extension de PHP qui fournit une interface
-abstraite pour accéder à différentes bases de données. Il permet aux
-développeurs de travailler avec plusieurs SGBD sans avoir à se soucier des
-différences entre eux. PDO prend en charge de nombreux SGBD, notamment MySQL,
-PostgreSQL, SQLite et d'autres.
-
-PDO facilite ainsi la gestion des connexions, des requêtes et des transactions
-qui pourraient être faites à une base de données. Il prend également en charge
-les requêtes préparées, ce qui permet de protéger contre les attaques par
-injection SQL et d'améliorer les performances des requêtes.
-
-### Connexion à une base de données SQLite
-
-Pour se connecter à une base de données SQLite avec PDO, il suffit de créer une
-instance de la classe `PDO` en spécifiant le chemin du fichier de base de
-données. Voici un exemple de code :
+Voici un exemple de code PHP qui utilise la fonction `htmlspecialchars` pour
+échapper les caractères spéciaux dans une chaîne de caractères :
 
 ```php
-<?php
-// Chemin vers le fichier de base de données SQLite
-$dbFile = 'path/to/database.db';
+// On définit une chaîne de caractères HTML avec des caractères spéciaux
+$string = "<a href='test'>Test</a>";
 
-// Création d'une instance de PDO pour se connecter à la base de données
-$pdo = new PDO('sqlite:' . $dbFile);
+// On échappe les caractères spéciaux
+// La chaîne échappée sera : &lt;a href='test'&gt;Test&lt;/a&gt;
+$escapedString = htmlspecialchars($string);
 
-// Configuration des options PDO
-$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-$pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
+// On affiche la chaîne échappée, qui sera littéralement
+// <a href='test'>Test</a>
+// et non un lien cliquable
+echo $escapedString;
 ```
 
-Dans cet exemple, nous créons une instance de `PDO` en spécifiant le chemin vers
-le fichier de base de données SQLite. Nous configurons également quelques
-options PDO pour gérer les erreurs et le mode de récupération des résultats.
+Dans cet exemple, la chaîne de caractères `$string` contient du code HTML qui
+génère un lien. Sans nettoyage, ce code serait interprété par le navigateur et
+afficherait un lien cliquable.
 
-Ensuite, nous pouvons utiliser l'objet `$pdo` pour exécuter des requêtes SQL et
-interagir avec la base de données.
+Cependant, en utilisant la fonction `htmlspecialchars`, nous échappons les
+caractères spéciaux et affichons la chaîne de caractères échappée.
 
-### Création d'une table
+Cela garantit que le code HTML (ou JavaScript) est affiché comme une chaîne de
+caractères littérale plutôt que comme du code qui serait interprété par le
+navigateur.
 
-Pour créer une table dans une base de données SQLite avec PDO, nous utilisons la
-méthode `exec()` de l'objet `PDO`. Voici un exemple de code :
+## Implications de sécurité
+
+Il existe plusieurs types d'attaques qui peuvent être réalisées si les saisies
+utilisateurs ne sont pas correctement nettoyées. Les deux types d'attaques les
+plus courants sont :
+
+- Les injections SQL
+- Les attaques XSS
+
+### Injections SQL
+
+Les injections SQL sont une technique d'attaque qui permet à une personne qui
+attaquerait votre application d'injecter du code SQL malveillant dans une
+requête SQL. Cela peut entraîner des fuites de données, des modifications non
+autorisées de données ou même la suppression de données.
+
+Les injections SQL se produisent généralement lorsque les entrées utilisateur ne
+sont pas correctement filtrées ou échappées avant d'être utilisées dans une
+requête SQL. Par exemple, si une application web permet à un utilisateur de
+fournir un nom d'utilisateur et un mot de passe, et que ces valeurs sont
+directement insérées dans une requête SQL sans être échappées, une personne
+attaquante pourrait entrer une chaîne de caractères malveillante qui modifie la
+requête SQL pour exécuter des actions non autorisées.
+
+Voici un exemple de code PHP vulnérable aux injections SQL :
+
+> [!CAUTION]
+>
+> **Attention** : ce code est vulnérable aux injections SQL et ne respecte pas
+> les bonnes pratiques pour enregistrer les mots de passe dans la base de
+> données.
+>
+> Ni la validation ni le nettoyage des saisies utilisateurs ne sont effectués.
+>
+> **Ce code ne doit pas être utilisé dans une application réelle**. Il est
+> uniquement fourni à titre d'exemple.
 
 ```php
 <?php
-// Création d'une table "users"
-$sql = 'CREATE TABLE IF NOT EXISTS users (
+// Constante pour le fichier de base de données SQLite
+const DATABASE_FILE = "./users.db";
+
+// Connexion à la base de données
+$pdo = new PDO("sqlite:" . DATABASE_FILE);
+
+// Création d'une table `users`
+$sql = "CREATE TABLE IF NOT EXISTS users (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    name TEXT NOT NULL,
-    email TEXT NOT NULL UNIQUE
-)';
+    email TEXT NOT NULL UNIQUE,
+    password TEXT NOT NULL
+)";
 
+// On exécute la requête SQL pour créer la table
 $pdo->exec($sql);
+
+// Gère la soumission du formulaire
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // On récupère les données du formulaire
+    $email = $_POST["email"];
+    $password = $_POST["password"];
+
+    // On prépare la requête SQL pour ajouter un utilisateur
+    $sql = "INSERT INTO users (email, password) VALUES ('$email', '$password')";
+
+    // On exécute la requête SQL pour ajouter l'utilisateur
+    $pdo->exec($sql);
+}
+?>
+
+<!-- Gère l'affichage du formulaire -->
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Création d'un compte</title>
+</head>
+
+<body>
+    <h1>Création d'un compte</h1>
+    <form action="register.php" method="POST">
+        <label for="email">E-mail :</label><br>
+        <input
+            type="text"
+            id="email"
+            name="email" />
+
+        <br>
+
+        <label for="password">Mot de passe :</label><br>
+        <input
+            type="password"
+            id="password"
+            name="password" />
+
+        <br>
+
+        <button type="submit">Envoyer</button>
+    </form>
+
+    <?php if ($_SERVER["REQUEST_METHOD"] == "POST") { ?>
+        <p>Le formulaire a été soumis avec succès.</p>
+    <?php } ?>
+</body>
+
+</html>
 ```
 
-Dans cet exemple, nous créons une table `users` avec trois colonnes : `id`,
-`name` et `email`.
+Dans cet exemple, les valeurs de `$email` et `$password` sont directement
+insérées dans la requête SQL sans être échappées. Cela signifie qu'une personne
+attaquante pourrait entrer une chaîne de caractères malveillante dans le champ
+`email` ou `password` qui modifierait la requête SQL pour exécuter des actions
+non autorisées.
 
-La colonne `id` est une clé primaire qui s'incrémente automatiquement, tandis
-que les colonnes `name` et `email` sont des champs de texte qui ne peuvent pas
-être nuls.
+Par exemple, une personne attaquante pourrait entrer les valeurs suivantes dans
+le formulaire :
 
-La colonne `email` est également définie comme unique, ce qui signifie qu'aucun
-deux utilisateurs ne peuvent avoir la même adresse e-mail.
+- Pour le champ `email` : `me@example.com`
+- Pour le champ `password` : `'); DROP TABLE users; --`
 
-Nous utilisons la méthode `exec()` pour exécuter la requête SQL de création de
-table. Cette méthode ne retourne pas de résultats, mais elle lève une exception
-en cas d'erreur.
+Cela modifierait la requête SQL pour qu'elle ressemble à ceci :
 
-### Insertion de données
+```sql
+INSERT INTO users (email, password) VALUES ('me@example.com', ''); DROP TABLE users; --'
+```
 
-Pour insérer des données dans une table, nous utilisons la méthode `prepare()`
-et `execute()` de l'objet `PDO`. Voici un exemple de code :
+Dans cet exemple, la requête SQL serait modifiée pour exécuter deux instructions
+SQL :
+
+1. `INSERT INTO users (email, password) VALUES ('email@example.com', '');` :
+   cela insérera un nouvel utilisateur avec l'adresse e-mail
+2. `DROP TABLE users;` : cela supprimera la table `users` de la base de données.
+
+Les points-virgules (`;`) séparent les requêtes SQL entre elles. Les traits
+d'union ( `--`) sont un commentaire SQL. Ce qui indique que tout ce qui suit ne
+sera donc pas exécuté.
+
+Au travers de cette injection SQL, la personne attaquante a réussi à exécuter
+deux instructions SQL au travers d'un champ de saisie, supprimant ainsi la table
+`users` de la base de données.
+
+D'autres attaques par injection SQL pourraient également être réalisées, comme
+la modification des données d'un utilisateur ou l'extraction de données
+sensibles de la base de données.
+
+Il est donc important de toujours valider et nettoyer les saisies utilisateurs
+avant de les utiliser dans une requête SQL. Cela garantit que seules les données
+valides et sûres sont utilisées dans l'application.
+
+### Attaques XSS
+
+Les attaques XSS (Cross-Site Scripting) sont une technique d'attaque qui permet
+à une personne attaquante d'injecter du code JavaScript malveillant dans une
+page web. Cela peut entraîner des fuites de données, des modifications non
+autorisées de données ou même la redirection de l'utilisateur vers un site
+malveillant.
+
+Tout comme les injections SQL, les attaques XSS se produisent généralement
+lorsque les entrées utilisateur ne sont pas correctement filtrées ou échappées
+avant d'être affichées dans une page web. Par exemple, si une application web
+permet à un utilisateur de fournir un commentaire, et que ce commentaire est
+directement affiché dans une page web sans être échappé, une personne attaquante
+pourrait entrer une chaîne de caractères malveillante qui injecte du code
+JavaScript dans la page web.
+
+Comme vous n'avez pas encore étudié JavaScript, nous ne nous attarderons pas
+trop en détail sur ce type d'attaques. Cependant, il est important de garder à
+l'esprit que les attaques XSS sont une menace sérieuse pour la sécurité des
+applications web et que les principes de sécurité que vous apprendrez dans ce
+mini-projet s'appliquent également à la prévention des attaques XSS.
+
+En se basant sur l'exemple précédent, voici un exemple de code PHP vulnérable
+aux attaques XSS :
+
+> [!CAUTION]
+>
+> **Attention** : ce code est vulnérable aux attaques XSS et ne respecte pas les
+> bonnes pratiques pour afficher les données dans une page web.
+>
+> **Ce code ne doit pas être utilisé dans une application réelle**. Il est
+> uniquement fourni à titre d'exemple.
 
 ```php
 <?php
-// Insertion d'un nouvel utilisateur
-$sql = 'INSERT INTO users (name, email) VALUES (:name, :email)';
+// Constante pour le fichier de base de données SQLite
+const DATABASE_FILE = './users.db';
 
+    // Connexion à la base de données
+    $pdo = new PDO("sqlite:" . DATABASE_FILE);
+
+    // Création d'une table `users`
+    $sql = 'SELECT * FROM users';
+
+    // On exécute la requête SQL pour récupérer les utilisateurs
+    $users = $pdo->query($sql);
+
+    // On transforme le résultat en tableau
+    $users = $users->fetchAll();
+?>
+
+<!-- Gère l'affichage du formulaire -->
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Affichage de tous les utilisateurs</title>
+</head>
+
+<body>
+    <h1>Création d'un compte</h1>
+    <form action="register.php" method="POST">
+        <label for="email">E-mail :</label><br>
+        <input
+            type="email"
+            id="email"
+            name="email" />
+
+        <br>
+
+        <label for="password">Mot de passe :</label><br>
+        <input
+            type="password"
+            id="password"
+            name="password" />
+
+        <br>
+
+        <button type="submit">Envoyer</button>
+    </form>
+
+    <?php if ($_SERVER["REQUEST_METHOD"] == "POST") { ?>
+        <p>Le formulaire a été soumis avec succès.</p>
+    <?php } ?>
+</body>
+
+</html>
+```
+
+## Se prémunir conte les injections SQL et les attaques XSS
+
+Pour se protéger contre les injections SQL et les attaques XSS, il est important
+de suivre certaines bonnes pratiques lors de la manipulation des données saisies
+par les utilisateurs. Voici quelques-unes des meilleures pratiques à suivre :
+
+- Toujours valider et filtrer les entrées utilisateur avant de les utiliser dans
+  une requête SQL ou de les afficher dans une page web. Cela garantit que seules
+  les données valides et sûres sont utilisées dans l'application. Cette étape a
+  déjà été vue dans le
+  [Cours 04 - Formulaires HTML et validation](../../04-formulaires-html-et-validation/01-theorie/README.md).
+- Toujours utiliser des requêtes préparées lors de l'interaction avec une base
+  de données. Cela garantit que les entrées utilisateur sont correctement
+  échappées et que le code SQL malveillant ne peut pas être injecté dans la
+  requête.
+- Toujours échapper les données avant de les afficher dans une page web. Cela
+  garantit que le code JavaScript malveillant ne peut pas être injecté dans la
+  page web.
+
+### Requêtes préparées avec PDO
+
+Les requêtes préparées sont une fonctionnalité de PDO qui permet de préparer une
+requête SQL avant de l'exécuter. Cela permet de séparer le code SQL des données
+et d'éviter les injections SQL.
+
+Les requêtes préparées utilisent des paramètres pour représenter les valeurs qui
+seront insérées dans la requête SQL. Ces paramètres sont ensuite liés aux
+valeurs réelles avant d'exécuter la requête.
+
+Si l'on reprend l'exemple précédent, voici comment utiliser des requêtes
+préparées pour éviter les injections SQL :
+
+```php
+// On définit la requête SQL avec des paramètres
+$sql = "INSERT INTO users (email, password) VALUES (:username, :password)";
+
+// On prépare la requête SQL
 $stmt = $pdo->prepare($sql);
-$stmt->bindParam(':name', $name);
-$stmt->bindParam(':email', $email);
-$name = 'Jane Doe';
-$email = 'jane.doe@heig-vd.ch';
 
+// On lie les paramètres aux valeurs réelles
+$stmt->bindParam(':email', $password);
+$stmt->bindParam(':password', $password);
+
+// On exécute la requête
 $stmt->execute();
 ```
 
-Dans cet exemple, nous insérons un nouvel utilisateur dans la table `users`.
-Nous préparons la requête SQL avec des paramètres nommés `:name` et `:email`,
-puis nous utilisons la méthode `bindParam()` pour lier les variables `$name` et
-`$email` aux paramètres de la requête.
+Dans cet exemple, les valeurs de `$email` et `$password` sont liées aux
+paramètres `:email` et `:password` dans la requête SQL. Cela garantit que les
+valeurs sont correctement échappées et que le code SQL malveillant ne peut pas
+être injecté dans la requête.
 
-Cela permet de protéger contre les attaques par injection SQL, car les
-paramètres sont automatiquement échappés par PDO. Ensuite, nous exécutons la
-requête avec la méthode `execute()`. Si l'insertion réussit, un nouvel
-enregistrement est ajouté à la table `users`.
+Grâce à cette simple approche, les valeurs de `$email` et `$password` sont
+traitées comme des données et non comme du code SQL. Cela empêche les injections
+SQL et garantit que seules les données valides et sûres sont utilisées dans
+l'application.
 
-### Récupération de données
+Pour éviter les injections SQL, il est donc important de toujours utiliser des
+requêtes préparées lors de l'interaction avec une base de données. Cela garantit
+que les entrées utilisateur sont correctement échappées et que le code SQL
+malveillant ne peut pas être injecté dans la requête.
 
-Pour récupérer des données d'une table, nous utilisons la méthode `query()` de
-l'objet `PDO`. Voici un exemple de code :
+Si vous testez maintenant le code PHP ci-dessus, vous verrez que la table
+`users` est créée et que les utilisateurs sont ajoutés à la base de données.
+
+Si vous essayez d'entrer une chaîne de caractères malveillante dans le champ
+`email` ou `password`, les valeurs seront correctement échappées, les données
+seront insérées dans la base de données et le code SQL malveillant ne sera pas
+exécuté. Cela garantit que le code SQL malveillant ne peut pas être injecté dans
+la requête SQL et que la sécurité de l'application est préservée.
+
+Il n'est pas nécessaire d'utiliser les requêtes préparées pour les instructions
+qui ne contiennent pas de données saisies par les utilisateurs. Par exemple, si
+vous souhaitez créer une table dans la base de données, vous pouvez le faire
+directement sans utiliser de requêtes préparées :
 
 ```php
-<?php
-// Récupération de tous les utilisateurs
-$sql = 'SELECT * FROM users';
-$stmt = $pdo->query($sql);
-$users = $stmt->fetchAll();
+// On définit la requête SQL pour créer une table
+$sql = "CREATE TABLE IF NOT EXISTS users (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    email TEXT NOT NULL UNIQUE,
+    password TEXT NOT NULL
+)";
 
-print_r($users);
+// On exécute la requête SQL pour créer la table
+$pdo->exec($sql);
 ```
 
-Dans cet exemple, nous récupérons tous les utilisateurs de la table `users`.
+Dans cet exemple, la requête SQL pour créer la table `users` ne contient pas de
+données saisies par les utilisateurs. Il n'est donc pas nécessaire d'utiliser
+des requêtes préparées.
 
-Nous exécutons la requête SQL avec la méthode `query()`, qui retourne un objet
-`PDOStatement`. Ensuite, nous utilisons la méthode `fetchAll()` pour récupérer
-tous les résultats de la requête sous forme de tableau associatif.
+### Échapper les données
+
+Pour éviter les attaques XSS, il est important d'échapper les données avant de
+les afficher dans une page web. Cela garantit que le code JavaScript malveillant
+ne peut pas être injecté dans la page web.
+
+Si l'on reprend l'exemple précédent, voici comment échapper les données avant de
+les afficher dans une page web :
+
+```php
+        <?php foreach ($users as $user) : ?>
+            <li><?= htmlspecialchars($user["email"]) ?></li>
+        <?php endforeach; ?>
+```
+
+Dans cet exemple, la fonction `htmlspecialchars` est utilisée pour échapper les
+caractères spéciaux dans la valeur de `$user["email"]`. Cela garantit que le
+code JavaScript malveillant ne peut pas être injecté dans la page web et que la
+sécurité de l'application est préservée.
+
+Il est donc important de toujours valider et nettoyer les saisies utilisateurs
+avant de les utiliser dans une requête SQL. Cela garantit que seules les données
+valides et sûres sont utilisées dans l'application.
 
 ## Conclusion
 
-TODO
+Dans cette session, nous avons vu l'importance de la validation et du nettoyage
+des saisies utilisateurs pour garantir la sécurité des applications web. Nous
+avons abordé les injections SQL et les attaques XSS, ainsi que les bonnes
+pratiques pour éviter ces types d'attaques.
+
+Nous avons vu comment utiliser des requêtes préparées avec PDO pour éviter les
+injections SQL et comment échapper les données avant de les afficher dans une
+page web pour éviter les attaques XSS.
+
+En suivant ces bonnes pratiques, vous pouvez améliorer la sécurité de votre
+application et vous prémunir contre les attaques par injection SQL et les
+attaques XSS.
 
 ## Mini-projet
 
@@ -225,3 +520,7 @@ renforcer votre compréhension des concepts vus en classe.
 
 Vous trouverez les détails des exercices ici :
 [Énoncés et solutions](../03-exercices/README.md).
+
+```
+
+```
