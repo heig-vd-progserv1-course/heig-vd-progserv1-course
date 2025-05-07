@@ -21,7 +21,8 @@
   - [Injections SQL](#injections-sql)
   - [Attaques XSS](#attaques-xss)
 - [Se prémunir conte les injections SQL et les attaques XSS](#se-prémunir-conte-les-injections-sql-et-les-attaques-xss)
-  - [Requêtes préparées](#requêtes-préparées)
+  - [Requêtes préparées avec PDO](#requêtes-préparées-avec-pdo)
+  - [Échapper les données](#échapper-les-données)
 - [Conclusion](#conclusion)
 - [Mini-projet](#mini-projet)
 - [Exercices](#exercices)
@@ -317,7 +318,7 @@ aux attaques XSS :
 > **Ce code ne doit pas être utilisé dans une application réelle**. Il est
 > uniquement fourni à titre d'exemple.
 
-````php
+```php
 <?php
 // Constante pour le fichier de base de données SQLite
 const DATABASE_FILE = './users.db';
@@ -372,77 +373,137 @@ const DATABASE_FILE = './users.db';
 
 </html>
 ```
+
 ## Se prémunir conte les injections SQL et les attaques XSS
 
 Pour se protéger contre les injections SQL et les attaques XSS, il est important
 de suivre certaines bonnes pratiques lors de la manipulation des données saisies
 par les utilisateurs. Voici quelques-unes des meilleures pratiques à suivre :
 
-- Toujours utiliser des requêtes préparées et des instructions paramétrées lors
-  de l'interaction avec une base de données. Cela garantit que les entrées
-  utilisateur sont correctement échappées et que le code SQL malveillant ne peut
-  pas être injecté dans la requête.
 - Toujours valider et filtrer les entrées utilisateur avant de les utiliser dans
   une requête SQL ou de les afficher dans une page web. Cela garantit que seules
-  les données valides et sûres sont utilisées dans l'application.
+  les données valides et sûres sont utilisées dans l'application. Cette étape a
+  déjà été vue dans le
+  [Cours 04 - Formulaires HTML et validation](../../04-formulaires-html-et-validation/01-theorie/README.md).
+- Toujours utiliser des requêtes préparées lors de l'interaction avec une base
+  de données. Cela garantit que les entrées utilisateur sont correctement
+  échappées et que le code SQL malveillant ne peut pas être injecté dans la
+  requête.
 - Toujours échapper les données avant de les afficher dans une page web. Cela
   garantit que le code JavaScript malveillant ne peut pas être injecté dans la
   page web.
 
-### Requêtes préparées
+### Requêtes préparées avec PDO
 
 Les requêtes préparées sont une fonctionnalité de PDO qui permet de préparer une
 requête SQL avant de l'exécuter. Cela permet de séparer le code SQL des données
-et d'éviter les injections SQL. Les requêtes préparées utilisent des paramètres
-pour représenter les valeurs qui seront insérées dans la requête SQL. Ces
-paramètres sont ensuite liés aux valeurs réelles avant d'exécuter la requête.
-Voici un exemple de requête préparée :
+et d'éviter les injections SQL.
+
+Les requêtes préparées utilisent des paramètres pour représenter les valeurs qui
+seront insérées dans la requête SQL. Ces paramètres sont ensuite liés aux
+valeurs réelles avant d'exécuter la requête.
+
+Si l'on reprend l'exemple précédent, voici comment utiliser des requêtes
+préparées pour éviter les injections SQL :
 
 ```php
 // On définit la requête SQL avec des paramètres
-$sql = "SELECT * FROM users WHERE username = :username AND password = :password";
+$sql = "INSERT INTO users (email, password) VALUES (:username, :password)";
 
 // On prépare la requête SQL
 $stmt = $pdo->prepare($sql);
 
 // On lie les paramètres aux valeurs réelles
-$stmt->bindParam(':username', $username);
+$stmt->bindParam(':email', $password);
 $stmt->bindParam(':password', $password);
 
 // On exécute la requête
 $stmt->execute();
+```
 
-// On récupère les résultats comme préalablement
-$results = $stmt->fetchAll();
-````
-
-Dans cet exemple, les valeurs de `$username` et `$password` sont liées aux
-paramètres `:username` et `:password` dans la requête SQL. Cela garantit que les
+Dans cet exemple, les valeurs de `$email` et `$password` sont liées aux
+paramètres `:email` et `:password` dans la requête SQL. Cela garantit que les
 valeurs sont correctement échappées et que le code SQL malveillant ne peut pas
 être injecté dans la requête.
 
+Grâce à cette simple approche, les valeurs de `$email` et `$password` sont
+traitées comme des données et non comme du code SQL. Cela empêche les injections
+SQL et garantit que seules les données valides et sûres sont utilisées dans
+l'application.
+
 Pour éviter les injections SQL, il est donc important de toujours utiliser des
-requêtes préparées et des instructions paramétrées lors de l'interaction avec
-une base de données. Cela garantit que les entrées utilisateur sont correctement
-échappées et que le code SQL malveillant ne peut pas être injecté dans la
-requête.
+requêtes préparées lors de l'interaction avec une base de données. Cela garantit
+que les entrées utilisateur sont correctement échappées et que le code SQL
+malveillant ne peut pas être injecté dans la requête.
+
+Si vous testez maintenant le code PHP ci-dessus, vous verrez que la table
+`users` est créée et que les utilisateurs sont ajoutés à la base de données.
+
+Si vous essayez d'entrer une chaîne de caractères malveillante dans le champ
+`email` ou `password`, les valeurs seront correctement échappées, les données
+seront insérées dans la base de données et le code SQL malveillant ne sera pas
+exécuté. Cela garantit que le code SQL malveillant ne peut pas être injecté dans
+la requête SQL et que la sécurité de l'application est préservée.
+
+Il n'est pas nécessaire d'utiliser les requêtes préparées pour les instructions
+qui ne contiennent pas de données saisies par les utilisateurs. Par exemple, si
+vous souhaitez créer une table dans la base de données, vous pouvez le faire
+directement sans utiliser de requêtes préparées :
+
+```php
+// On définit la requête SQL pour créer une table
+$sql = "CREATE TABLE IF NOT EXISTS users (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    email TEXT NOT NULL UNIQUE,
+    password TEXT NOT NULL
+)";
+
+// On exécute la requête SQL pour créer la table
+$pdo->exec($sql);
+```
+
+Dans cet exemple, la requête SQL pour créer la table `users` ne contient pas de
+données saisies par les utilisateurs. Il n'est donc pas nécessaire d'utiliser
+des requêtes préparées.
 
 ### Échapper les données
 
 Pour éviter les attaques XSS, il est important d'échapper les données avant de
 les afficher dans une page web. Cela garantit que le code JavaScript malveillant
-ne peut pas être injecté dans la page web. Voici un exemple de code PHP qui
-utilise la fonction `htmlspecialchars` pour échapper les caractères spéciaux
-dans une chaîne de caractères avant de l'afficher dans une page web :
+ne peut pas être injecté dans la page web.
+
+Si l'on reprend l'exemple précédent, voici comment échapper les données avant de
+les afficher dans une page web :
 
 ```php
+        <?php foreach ($users as $user) : ?>
+            <li><?= htmlspecialchars($user["email"]) ?></li>
+        <?php endforeach; ?>
+```
+
+Dans cet exemple, la fonction `htmlspecialchars` est utilisée pour échapper les
+caractères spéciaux dans la valeur de `$user["email"]`. Cela garantit que le
+code JavaScript malveillant ne peut pas être injecté dans la page web et que la
+sécurité de l'application est préservée.
+
 Il est donc important de toujours valider et nettoyer les saisies utilisateurs
 avant de les utiliser dans une requête SQL. Cela garantit que seules les données
 valides et sûres sont utilisées dans l'application.
 
 ## Conclusion
 
-TODO
+Dans cette session, nous avons vu l'importance de la validation et du nettoyage
+des saisies utilisateurs pour garantir la sécurité des applications web. Nous
+avons abordé les injections SQL et les attaques XSS, ainsi que les bonnes
+pratiques pour éviter ces types d'attaques.
+
+Nous avons vu comment utiliser des requêtes préparées avec PDO pour éviter les
+injections SQL et comment échapper les données avant de les afficher dans une
+page web pour éviter les attaques XSS.
+
+En suivant ces bonnes pratiques, vous pouvez améliorer la sécurité de votre
+application et vous prémunir contre les attaques par injection SQL et les
+attaques XSS.
 
 ## Mini-projet
 
@@ -459,4 +520,7 @@ renforcer votre compréhension des concepts vus en classe.
 
 Vous trouverez les détails des exercices ici :
 [Énoncés et solutions](../03-exercices/README.md).
+
+```
+
 ```

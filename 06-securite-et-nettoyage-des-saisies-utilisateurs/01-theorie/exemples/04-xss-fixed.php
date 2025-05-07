@@ -26,11 +26,11 @@ $users = $users->fetchAll();
 <body>
     <h1>Comptes utilisateurs</h1>
 
-    <a href="01-sql-injection.php"><button>Créer un compte</button></a>
+    <a href="03-sql-injection-fixed.php"><button>Créer un compte</button></a>
 
     <ul>
         <?php foreach ($users as $user) : ?>
-            <li><?= $user["email"] ?></li>
+            <li><?= htmlspecialchars($user["email"]) ?></li>
         <?php endforeach; ?>
     </ul>
 </body>
