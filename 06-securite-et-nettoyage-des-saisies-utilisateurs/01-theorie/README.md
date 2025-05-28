@@ -41,7 +41,7 @@ nettoyage des saisies utilisateurs. Nous allons aborder les injections SQL et
 les attaques XSS, ainsi que les bonnes pratiques pour éviter ces types
 d'attaques.
 
-De façon plus précise, les personnes qui étudient devraient être capables de :
+De façon plus concise, les personnes qui étudient devraient être capables de :
 
 - Lister les différences entre la validation et le nettoyage des saisies
   utilisateurs

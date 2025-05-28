@@ -13,7 +13,7 @@
 ## Table des matières
 
 - [Ressources](#ressources)
-- [Tables des matières](#table-des-matières)
+- [Table des matières](#table-des-matières)
 - [Objectifs](#objectifs)
 - [Modalités de l'unité d'enseignement](#modalités-de-lunité-denseignement)
   - [Objectifs de l'unité d'enseignement](#objectifs-de-lunité-denseignement)
@@ -39,7 +39,7 @@ d'enseignement et une introduction à PHP. Vous apprendrez les bases de PHP, y
 compris la syntaxe, les variables, les constantes, les opérateurs et les
 structures de contrôle afin de vous préparer à la suite du cours.
 
-De façon plus précise, les personnes qui étudient devraient être capables de :
+De façon plus concise, les personnes qui étudient devraient être capables de :
 
 - Lister les objectifs de l'unité d'enseignement
 - Lister les modalités d'organisation de l'unité d'enseignement
@@ -125,8 +125,8 @@ environnement de développement.
 
 Vous aurez droit au contenu du cours, à vos notes personnelles, à la
 documentation officielle de PHP (<https://www.php.net/manual/index.php>) ainsi
-qu'aux ressources de MDN (<https://developer.mozilla.org>). **Aucune aide ne
-sera autorisée pendant cette partie pratique** (communication, outils
+qu'aux ressources de MDN (<https://developer.mozilla.org>). **Aucune autre aide
+ne sera autorisée pendant cette partie pratique** (communication, outils
 d'intelligence artificielle, etc.).
 
 ### La programmation et l'anglais
@@ -189,7 +189,7 @@ mobiles, jeux vidéos, etc.).
 
 ### Comment fonctionne PHP
 
-De façon plus précise, pour écrire et exécuter du code PHP, vous avez besoin de
+De façon plus concise, pour écrire et exécuter du code PHP, vous avez besoin de
 :
 
 - Un serveur web (Apache, Nginx, etc.) pour recevoir les requêtes du client et
@@ -250,7 +250,7 @@ public class Main {
 
 Ici, la fonction `echo` est utilisée pour afficher du texte sur la page web.
 
-De façon plus précise, le code PHP est exécuté sur le serveur web, qui génère du
+De façon plus concise, le code PHP est exécuté sur le serveur web, qui génère du
 HTML à partir du code PHP. Ce HTML est ensuite envoyé au navigateur du client,
 qui l'affiche sur la page web.
 

@@ -63,7 +63,7 @@ pourrez insérer, récupérer et supprimer des données de cette table.
 Vous allez également apprendre à utiliser PDO pour interagir avec la base de
 données.
 
-À l'issue de cette session, les personnes qui étudient devraient avoir pu :
+De façon plus concise, les personnes qui étudient devraient avoir pu :
 
 - Intégrer PDO dans un projet PHP
 - Créer une base de données SQLite à l'aide de PDO
@@ -346,10 +346,10 @@ function addPet(
         '$species',
         '$nickname',
         '$sex',
-        $age,
+        '$age',
         '$color',
         '$personalities',
-        $size,
+        '$size',
         '$notes'
     )";
 
@@ -595,10 +595,10 @@ function addPet(
         '$species',
         '$nickname',
         '$sex',
-        $age,
+        '$age',
         '$color',
         '$personalitiesAsString',
-        $size,
+        '$size',
         '$notes'
     )";
 

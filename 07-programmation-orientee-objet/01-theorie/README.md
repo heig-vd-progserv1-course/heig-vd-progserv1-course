@@ -13,7 +13,7 @@
 ## Table des matières
 
 - [Ressources](#ressources)
-- [Tables des matières](#table-des-matières)
+- [Table des matières](#table-des-matières)
 - [Objectifs](#objectifs)
 - [TODO](#todo)
 - [Conclusion](#conclusion)
@@ -24,7 +24,7 @@
 
 TODO
 
-De façon plus précise, les personnes qui étudient devraient être capables de :
+De façon plus concise, les personnes qui étudient devraient être capables de :
 
 - TODO
 

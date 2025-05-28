@@ -1,15 +1,15 @@
-# Cours 08 - Récapitulatif de l'unité d'enseignement et finalisation de l'application - Mini-projet
+# Cours 08 - Récapitulatif de l'unité d'enseignement avec préparation à l'examen et finalisation de l'application - Mini-projet
 
 Ce mini-projet est conçu pour vous permettre de mettre en pratique les concepts
 théoriques vus dans le cours
-_[Cours 08 - Récapitulatif de l'unité d'enseignement et finalisation de l'application](../01-theorie/README.md)_.
+_[Cours 08 - Récapitulatif de l'unité d'enseignement avec préparation à l'examen et finalisation de l'application](../01-theorie/README.md)_.
 
 ## Ressources
 
 - Théorie : [Support de cours](../01-theorie/README.md) ·
-  [Présentation (web)](https://heig-vd-progserv1-course.github.io/heig-vd-progserv1-course/08-recapitulatif-de-lunite-denseignement-et-finalisation-de-lapplication/01-theorie/index.html)
+  [Présentation (web)](https://heig-vd-progserv1-course.github.io/heig-vd-progserv1-course/08-recapitulatif-de-lunite-denseignement-avec-preparation-a-lexamen-et-finalisation-de-lapplication/01-theorie/index.html)
   ·
-  [Présentation (PDF)](https://heig-vd-progserv1-course.github.io/heig-vd-progserv1-course/08-recapitulatif-de-lunite-denseignement-et-finalisation-de-lapplication/01-theorie/08-recapitulatif-de-lunite-denseignement-et-finalisation-de-lapplication-presentation.pdf)
+  [Présentation (PDF)](https://heig-vd-progserv1-course.github.io/heig-vd-progserv1-course/08-recapitulatif-de-lunite-denseignement-avec-preparation-a-lexamen-et-finalisation-de-lapplication/01-theorie/08-recapitulatif-de-lunite-denseignement-avec-preparation-a-lexamen-et-finalisation-de-lapplication-presentation.pdf)
 - Mini-projet : [Consignes](../02-mini-project/README.md) ·
   [Solution](../02-mini-project/solution/)
 - Exercices : [Énoncés et solutions](../03-exercices/README.md)
@@ -17,7 +17,7 @@ _[Cours 08 - Récapitulatif de l'unité d'enseignement et finalisation de l'appl
 ## Table des matières
 
 - [Ressources](#ressources)
-- [Tables des matières](#table-des-matières)
+- [Table des matières](#table-des-matières)
 - [Objectifs de la session](#objectifs-de-la-session)
 - [Solution](#solution)
 - [Conclusion](#conclusion)
@@ -25,7 +25,7 @@ _[Cours 08 - Récapitulatif de l'unité d'enseignement et finalisation de l'appl
 
 ## Objectifs de la session
 
-À l'issue de cette session, les personnes qui étudient devraient avoir pu :
+De façon plus concise, les personnes qui étudient devraient avoir pu :
 
 - TODO
 

@@ -54,7 +54,7 @@ L'objectif de cette session est de vous familiariser avec les attaques les plus
 courantes sur le web et de vous montrer comment les réaliser sur une application
 PHP et, surtout, comment les corriger.
 
-À l'issue de cette session, les personnes qui étudient devraient avoir pu :
+De façon plus concise, les personnes qui étudient devraient avoir pu :
 
 - Réaliser une injection SQL sur une application PHP
 - Réaliser une attaque XSS sur une application PHP
@@ -132,10 +132,10 @@ function addPet(
         '$species',
         '$nickname',
         '$sex',
-        $age,
+        '$age',
         '$color',
         '$personalitiesAsString',
-        $size,
+        '$size',
         '$notes'
     )";
 
@@ -408,10 +408,10 @@ function addPet(
 -        '$species',
 -        '$nickname',
 -        '$sex',
--        $age,
+-        '$age',
 -        '$color',
 -        '$personalitiesAsString',
--        $size,
+-        '$size',
 -        '$notes'
 +        :name,
 +        :species,

@@ -35,19 +35,18 @@ Quelles sont les solutions pour les éviter ?
 
 Il existe deux types de problèmes de sécurité principaux :
 
-1. **Injection SQL** : Cela se produit lorsque des données non filtrées sont
+1. **Injection SQL** : cela se produit lorsque des données non filtrées sont
    insérées directement dans une requête SQL. Cela peut permettre à un attaquant
    d'exécuter des commandes SQL arbitraires sur la base de données.
 
-   **Solution** : Utiliser des requêtes préparées et des instructions
-   paramétrées pour éviter l'injection SQL.
+   **Solution** : utiliser des requêtes préparées pour éviter l'injection SQL.
 
-2. **Cross-Site Scripting (XSS)** : Cela se produit lorsque des données non
+2. **Cross-Site Scripting (XSS)** : cela se produit lorsque des données non
    filtrées sont affichées sur une page web. Cela peut permettre à un attaquant
    d'injecter du code JavaScript malveillant dans la page, qui sera exécuté par
    le navigateur de l'utilisateur.
 
-   **Solution** : Échapper les données avant de les afficher sur la page web.
+   **Solution** : échapper les données avant de les afficher sur la page web.
 
 </details>
 

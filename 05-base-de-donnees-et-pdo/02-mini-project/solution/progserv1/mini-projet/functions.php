@@ -84,10 +84,10 @@ function addPet(
         '$species',
         '$nickname',
         '$sex',
-        $age,
+        '$age',
         '$color',
         '$personalitiesAsString',
-        $size,
+        '$size',
         '$notes'
     )";
 

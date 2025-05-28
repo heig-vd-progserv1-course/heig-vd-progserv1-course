@@ -495,9 +495,9 @@ des difficultés !**
 [illustration-objectifs]:
 	https://images.unsplash.com/photo-1516389573391-5620a0263801?fit=crop&h=720
 [illustration-validation-et-nettoyage-des-saisies-utilisateurs]:
-	https://images.unsplash.com/photo-1628177142898-93e36e4e3a50?fit=crop&h=720
+	https://images.unsplash.com/photo-1554224155-1696413565d3?fit=crop&h=720
 [illustration-nettoyage-des-saisies-utilisateurs]:
-	https://images.unsplash.com/photo-1504198452-0c1f3a4b5d7e?fit=crop&h=720
+	https://images.unsplash.com/photo-1628177142898-93e36e4e3a50?fit=crop&h=720
 [illustration-injections-sql]:
 	https://images.unsplash.com/photo-1633412802994-5c058f151b66?fit=crop&h=720
 [illustration-attaques-xss]:

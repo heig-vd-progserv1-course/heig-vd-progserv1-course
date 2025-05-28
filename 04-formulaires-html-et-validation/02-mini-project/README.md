@@ -63,7 +63,7 @@ Pour rappel, le formulaire sera composé de plusieurs champs :
 - Taille en cm (un champ numérique facultatif)
 - Notes (un champ de texte libre facultatif)
 
-À l'issue de cette session, les personnes qui étudient devraient avoir pu :
+De façon plus concise, les personnes qui étudient devraient avoir pu :
 
 - Créer un formulaire HTML permettant de créer un nouvel animal de compagnie
 - Valider les données du formulaire côté serveur

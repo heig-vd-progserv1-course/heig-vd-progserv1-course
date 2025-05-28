@@ -1,11 +1,11 @@
-# Cours 08 - Récapitulatif de l'unité d'enseignement et finalisation de l'application
+# Cours 08 - Récapitulatif de l'unité d'enseignement avec préparation à l'examen et finalisation de l'application
 
 ## Ressources
 
 - Théorie : [Support de cours](../01-theorie/README.md) ·
-  [Présentation (web)](https://heig-vd-progserv1-course.github.io/heig-vd-progserv1-course/08-recapitulatif-de-lunite-denseignement-et-finalisation-de-lapplication/01-theorie/index.html)
+  [Présentation (web)](https://heig-vd-progserv1-course.github.io/heig-vd-progserv1-course/08-recapitulatif-de-lunite-denseignement-avec-preparation-a-lexamen-et-finalisation-de-lapplication/01-theorie/index.html)
   ·
-  [Présentation (PDF)](https://heig-vd-progserv1-course.github.io/heig-vd-progserv1-course/08-recapitulatif-de-lunite-denseignement-et-finalisation-de-lapplication/01-theorie/08-recapitulatif-de-lunite-denseignement-et-finalisation-de-lapplication-presentation.pdf)
+  [Présentation (PDF)](https://heig-vd-progserv1-course.github.io/heig-vd-progserv1-course/08-recapitulatif-de-lunite-denseignement-avec-preparation-a-lexamen-et-finalisation-de-lapplication/01-theorie/08-recapitulatif-de-lunite-denseignement-avec-preparation-a-lexamen-et-finalisation-de-lapplication-presentation.pdf)
 - Mini-projet : [Consignes](../02-mini-project/README.md) ·
   [Solution](../02-mini-project/solution/)
 - Exercices : [Énoncés et solutions](../03-exercices/README.md)
@@ -13,7 +13,7 @@
 ## Table des matières
 
 - [Ressources](#ressources)
-- [Tables des matières](#table-des-matières)
+- [Table des matières](#table-des-matières)
 - [Objectifs](#objectifs)
 - [TODO](#todo)
 - [Conclusion](#conclusion)
@@ -24,7 +24,7 @@
 
 TODO
 
-De façon plus précise, les personnes qui étudient devraient être capables de :
+De façon plus concise, les personnes qui étudient devraient être capables de :
 
 - TODO
 

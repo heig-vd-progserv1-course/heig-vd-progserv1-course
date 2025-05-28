@@ -17,7 +17,7 @@ _[Cours 02 - Fonctions](../01-theorie/README.md)_.
 ## Table des matières
 
 - [Ressources](#ressources)
-- [Tables des matières](#table-des-matières)
+- [Table des matières](#table-des-matières)
 - [Exercice 1](#exercice-1)
 - [Exercice 2](#exercice-2)
 - [Exercice 3](#exercice-3)

@@ -42,7 +42,7 @@ Nous allons également aborder la validation des formulaires, tant côté serveu
 que côté client. La validation est essentielle pour garantir la sécurité et
 l'intégrité des données, ainsi que pour améliorer l'expérience utilisateur.
 
-De façon plus précise, les personnes qui étudient devraient être capables de :
+De façon plus concise, les personnes qui étudient devraient être capables de :
 
 - Créer des formulaires HTML pour collecter des données utilisateur.
 - Envoyer des données de formulaires au serveur à l'aide de PHP.

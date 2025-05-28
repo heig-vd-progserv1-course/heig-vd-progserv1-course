@@ -1,11 +1,11 @@
-# Cours 08 - Récapitulatif de l'unité d'enseignement et finalisation de l'application
+# Cours 08 - Récapitulatif de l'unité d'enseignement avec préparation à l'examen et finalisation de l'application
 
 ## Ressources
 
 - Récapitulatif de l'unité d'enseignement :
-  [Présentation (web)](https://heig-vd-progserv1-course.github.io/heig-vd-progserv1-course/08-recapitulatif-de-lunite-denseignement-et-finalisation-de-lapplication/01-theorie/index.html)
+  [Présentation (web)](https://heig-vd-progserv1-course.github.io/heig-vd-progserv1-course/08-recapitulatif-de-lunite-denseignement-avec-preparation-a-lexamen-et-finalisation-de-lapplication/01-theorie/index.html)
   ·
-  [Présentation (PDF)](https://heig-vd-progserv1-course.github.io/heig-vd-progserv1-course/08-recapitulatif-de-lunite-denseignement-et-finalisation-de-lapplication/01-theorie/08-recapitulatif-de-lunite-denseignement-et-finalisation-de-lapplication-presentation.pdf)
+  [Présentation (PDF)](https://heig-vd-progserv1-course.github.io/heig-vd-progserv1-course/08-recapitulatif-de-lunite-denseignement-avec-preparation-a-lexamen-et-finalisation-de-lapplication/01-theorie/08-recapitulatif-de-lunite-denseignement-avec-preparation-a-lexamen-et-finalisation-de-lapplication-presentation.pdf)
   ·
   [Résultats des formulaires de feedback](./01-recapitulatif-de-lunite-denseignement/)
 - Mini-projet : [Consignes](./02-mini-project/README.md) ·

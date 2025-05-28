@@ -45,7 +45,7 @@ Dans ce cours, nous allons voir comment déclarer et appeler des fonctions en
 PHP. Nous allons également voir comment passer des paramètres à une fonction et
 comment retourner une valeur depuis une fonction.
 
-De façon plus précise, les personnes qui étudient devraient être capables de :
+De façon plus concise, les personnes qui étudient devraient être capables de :
 
 - Décrire ce qu'est une fonction en programmation
 - Déclarer une fonction en PHP

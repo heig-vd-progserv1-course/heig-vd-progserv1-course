@@ -52,7 +52,7 @@ Les tableaux et les boucles sont des concepts fondamentaux en programmation et
 sont utilisés dans de nombreux programmes et applications, notamment pour
 stocker et parcourir une collection d'animaux de compagnie.
 
-De façon plus précise, les personnes qui étudient devraient être capables de :
+De façon plus concise, les personnes qui étudient devraient être capables de :
 
 - Décrire les tableaux et leurs caractéristiques
 - Décrire la différence entre les tableaux indexés, les tableaux associatifs et

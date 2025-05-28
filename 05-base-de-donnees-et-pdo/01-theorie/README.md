@@ -44,7 +44,7 @@ intégré dans de nombreuses applications et langages de programmation.
 Nous allons étudier l'extension PDO de PHP, qui fournit une interface abstraite
 pour accéder et interagir avec différentes bases de données
 
-De façon plus précise, les personnes qui étudient devraient être capables de :
+De façon plus concise, les personnes qui étudient devraient être capables de :
 
 - Expliquer les concepts de base des bases de données et des systèmes de gestion
   de base de données (SGBD)

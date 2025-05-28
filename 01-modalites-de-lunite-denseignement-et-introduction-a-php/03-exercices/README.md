@@ -17,7 +17,7 @@ _[Cours 01 - Modalités de l'unité d'enseignement et introduction à PHP](../01
 ## Table des matières
 
 - [Ressources](#ressources)
-- [Tables des matières](#table-des-matières)
+- [Table des matières](#table-des-matières)
 - [Exercice 1](#exercice-1)
 - [Exercice 2](#exercice-2)
 - [Exercice 3](#exercice-3)
