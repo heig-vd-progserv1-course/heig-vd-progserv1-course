@@ -27,14 +27,13 @@ if (isset($_GET["id"])) {
 <html lang="fr">
 
 <head>
-    <title>Visualise et modifie un animal de compagnie | Gestionnaire d'animaux de compagnie</title>
-
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="color-scheme" content="light dark">
-
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
-    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="css/custom.css">
+
+    <title>Visualise et modifie un animal de compagnie | Gestionnaire d'animaux de compagnie</title>
 </head>
 
 <body>
@@ -44,36 +43,37 @@ if (isset($_GET["id"])) {
         <p>Utilise cette page pour visualiser un animal de compagnie.</p>
 
         <form>
-            <label for="name">Nom</label>
+            <label for="name">Nom :</label>
             <input type="text" id="name" value="<?= htmlspecialchars($pet["name"]) ?>" disabled />
 
-            <label for="species">Espèce</label>
+            <label for="species">Espèce :</label>
             <select id="species" disabled>
                 <?php foreach (Pet::SPECIES as $key => $value) { ?>
                     <option value="<?= $key ?>" <?= $pet["species"] == $key ? "selected" : "" ?>><?= $value ?></option>
                 <?php } ?>
             </select>
 
-            <label for="nickname">Surnom</label>
+            <label for="nickname">Surnom :</label>
             <input type="text" id="nickname" value="<?= htmlspecialchars($pet["nickname"]) ?>" disabled />
 
             <fieldset>
-                <legend>Sexe</legend>
+                <legend>Sexe :</legend>
 
-                <?php foreach (Pet::SEX as $key => $value) { ?>
-                    <input type="radio" id="<?= $key ?>" <?= $pet["sex"] == $key ? "checked" : "" ?> disabled />
-                    <label for="<?= $key ?>"><?= $value ?></label>
-                <?php } ?>
+                <input type="radio" id="male" <?= $pet["sex"] == "male" ? "checked" : "" ?> disabled />
+                <label for="male">Mâle</label>
+
+                <input type="radio" id="female" <?= $pet["sex"] == "female" ? "checked" : "" ?> disabled />
+                <label for="female">Femelle</label>
             </fieldset>
 
-            <label for="age">Âge</label>
+            <label for="age">Âge :</label>
             <input type="number" id="age" value="<?= htmlspecialchars($pet["age"]) ?>" disabled />
 
-            <label for="color">Couleur</label>
+            <label for="color">Couleur :</label>
             <input type="color" id="color" value="<?= htmlspecialchars($pet["color"]) ?>" disabled />
 
             <fieldset>
-                <legend>Personnalité</legend>
+                <legend>Personnalité :</legend>
 
                 <?php foreach (Pet::PERSONALITIES as $key => $value) { ?>
                     <div>
@@ -83,10 +83,10 @@ if (isset($_GET["id"])) {
                 <?php } ?>
             </fieldset>
 
-            <label for="size">Taille</label>
+            <label for="size">Taille :</label>
             <input type="number" id="size" value="<?= htmlspecialchars($pet["size"]) ?>" disabled />
 
-            <label for="notes">Notes</label>
+            <label for="notes">Notes :</label>
             <textarea id="notes" rows="4" cols="50" disabled><?= htmlspecialchars($pet["notes"]) ?></textarea>
 
             <a href="delete.php?id=<?= htmlspecialchars($pet["id"]) ?>">

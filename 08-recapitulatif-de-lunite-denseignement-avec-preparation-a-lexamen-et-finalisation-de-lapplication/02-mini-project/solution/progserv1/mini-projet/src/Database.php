@@ -1,14 +1,29 @@
 <?php
 
 class Database {
-    // On définit la constante `DATABASE_FILE` pour le chemin vers le fichier de base de données SQLite
     const DATABASE_FILE = '../petsmanager.db';
 
-    // On crée une instance de PDO pour se connecter à la base de données
     private $pdo;
 
     public function __construct() {
         $this->pdo = new PDO("sqlite:" . self::DATABASE_FILE);
+
+        $sql = "CREATE TABLE IF NOT EXISTS pets (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            name TEXT NOT NULL,
+            species TEXT NOT NULL,
+            nickname TEXT,
+            sex TEXT NOT NULL,
+            age INTEGER NOT NULL,
+            color TEXT,
+            personalities TEXT,
+            size FLOAT,
+            notes TEXT
+        );";
+
+        $stmt = $this->pdo->prepare($sql);
+
+        $stmt->execute();
     }
 
     public function getPdo() {

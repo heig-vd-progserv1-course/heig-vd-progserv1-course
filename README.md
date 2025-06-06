@@ -22,7 +22,7 @@ Suisse !
 
 Grâce à ces compétences, la personne qui étudie sera en mesure de développer des
 applications web simples pour gérer une collection de données (par exemple, un
-carnet d'adresses, un gestionnaire de tâches, sa liste favorites de jeux vidéo,
+carnet d'adresses, un gestionnaire de tâches, sa liste favorite de jeux vidéo,
 etc.).
 
 ## ➡️ Par où commencer ?

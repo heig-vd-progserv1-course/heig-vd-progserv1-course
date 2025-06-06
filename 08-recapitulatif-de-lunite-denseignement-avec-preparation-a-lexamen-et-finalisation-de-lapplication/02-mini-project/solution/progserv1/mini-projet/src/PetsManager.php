@@ -3,31 +3,10 @@ require 'Database.php';
 require 'Pet.php';
 
 class PetsManager {
-    private $pdo;
+    private $database;
 
     public function __construct() {
-        // On crée une instance de la classe `Database`
-        $database = new Database();
-
-        // On récupère l'instance de PDO
-        $this->pdo = $database->getPdo();
-
-        // On définit la requête SQL pour créer la table `pets` si elle n'existe pas déjà
-        $sql = "CREATE TABLE IF NOT EXISTS pets (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            name TEXT NOT NULL,
-            species TEXT NOT NULL,
-            nickname TEXT,
-            sex TEXT NOT NULL,
-            age INTEGER NOT NULL,
-            color TEXT,
-            personalities TEXT,
-            size FLOAT,
-            notes TEXT
-        );";
-
-        // On exécute la requête SQL pour créer la table
-        $this->pdo->exec($sql);
+        $this->database = new Database();
     }
 
     public function getPets() {
@@ -35,7 +14,7 @@ class PetsManager {
         $sql = "SELECT * FROM pets";
 
         // On prépare la requête SQL
-        $stmt = $this->pdo->prepare($sql);
+        $stmt = $this->database->getPdo()->prepare($sql);
 
         // On exécute la requête SQL
         $stmt->execute();
@@ -59,7 +38,7 @@ class PetsManager {
         $sql = "SELECT * FROM pets WHERE id = :id";
 
         // On prépare la requête SQL
-        $stmt = $this->pdo->prepare($sql);
+        $stmt = $this->database->getPdo()->prepare($sql);
 
         // On lie le paramètre
         $stmt->bindValue(':id', $id);
@@ -107,7 +86,7 @@ class PetsManager {
         )";
 
         // On prépare la requête SQL
-        $stmt = $this->pdo->prepare($sql);
+        $stmt = $this->database->getPdo()->prepare($sql);
 
         // On lie les paramètres
         $stmt->bindValue(':name', $pet->getName());
@@ -124,7 +103,7 @@ class PetsManager {
         $stmt->execute();
 
         // On récupère l'identifiant de l'animal ajouté
-        $petId = $this->pdo->lastInsertId();
+        $petId = $this->database->getPdo()->lastInsertId();
 
         // On retourne l'identifiant de l'animal ajouté.
         return $petId;
@@ -148,7 +127,7 @@ class PetsManager {
         WHERE id = :id";
 
         // On prépare la requête SQL
-        $stmt = $this->pdo->prepare($sql);
+        $stmt = $this->database->getPdo()->prepare($sql);
 
         // On lie les paramètres
         $stmt->bindValue(':id', $id);
@@ -171,7 +150,7 @@ class PetsManager {
         $sql = "DELETE FROM pets WHERE id = :id";
 
         // On prépare la requête SQL
-        $stmt = $this->pdo->prepare($sql);
+        $stmt = $this->database->getPdo()->prepare($sql);
 
         // On lie le paramètre
         $stmt->bindValue(':id', $id);

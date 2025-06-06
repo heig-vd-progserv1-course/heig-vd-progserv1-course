@@ -8,7 +8,7 @@
 - [Pendant l'unité d'enseignement](#pendant-lunité-denseignement)
   - [Formulaire de retours sur Framaform](#formulaire-de-retours-sur-framaform)
   - [Message envoyé aux personnes qui étudient avant chaque cours](#message-envoyé-aux-personnes-qui-étudient-avant-chaque-cours)
-- [Context pour des outils AI](#context-pour-des-outils-ai)
+- [Contexte pour des outils AI](#contexte-pour-des-outils-ai)
 
 ## Avant l'unité d'enseignement
 
@@ -52,58 +52,71 @@ Ce questionnaire de quelques minutes nous permet de savoir comment vous avez
 vécu l'unité d'enseignement jusqu'ici et si une aide supplémentaire est
 nécessaire.
 
-Il est important pour nous de savoir ce que vous en pensez, car cela nous aide à
-améliorer l'unité d'enseignement et à mieux répondre à vos besoins.
+Il est important pour nous d'avoir votre avis, car cela nous aide à améliorer
+l'unité d'enseignement et à mieux répondre à vos besoins.
 
 Toutes les données sont anonymes et elles ne sont utilisées que pour améliorer
-l'unité d'enseignement.
+l'unité d'enseignement. Nous prendrons du temps lors du prochain cours pour un
+moment de discussions/partages sur ces résultats.
 
 Merci pour votre collaboration !
 
 #### Questions
 
 - Pour chacune de ces affirmations, sélectionnez l'option qui reflète le mieux
-  votre ressenti à propos de cette unité d'enseignement (grille)
+  votre ressenti à propos de cette unité d'enseignement (grille à choix unique -
+  Pas du tout d'accord ★☆☆☆, Pas d'accord ★★☆☆, Plutôt d'accord ★★★★, Tout à
+  fait d'accord ★★★★★)
 
-  - Description : N'hésitez pas à partager librement votre ressenti sur cette
-    unité d'enseignement. Si elle ne vous a pas satisfait, vos retours sont
-    précieux pour nous aider à nous améliorer. Vous pouvez également formuler
-    des commentaires plus spécifiques dans la section « Autres remarques et
-    commentaires », si vous le souhaitez.
   - Options :
+    - Les attentes et les objectifs sont clairement définis
+    - Les contenus (supports, présentations, consignes, énoncés, etc.) sont
+      pertinents et me permettent de travailler de façon autonome
+    - Les présentations orales sont pertinentes et permettent de mieux
+      comprendre la matière
+    - Lorsque j’ai rencontré des difficultés, j’ai pu trouver des réponses à mes
+      questions (grâce aux discussions en classe, aux supports de cours, etc.)
+    - Je me sens capable de réaliser une petite application web avec PHP pour
+      gérer une collection d'objets (visualisation, insertion, modification et
+      suppression)
+    - J'apprécie la durée courte des parties théoriques au début de chaque cours
+    - Les mini-projets et les exercices sont pertinents et adaptés à mon niveau
+    - L'unité d'enseignement est variée, motivante et permet de ne pas m'ennuyer
+    - J'ai réalisé tous les mini-projets et exercices proposés
+    - J'aurais plaisir à suivre une unité d'enseignement qui reprend la même
+      méthode d'enseignement
+  - Description : N'hésitez pas à partager librement votre ressenti sur cette
+    unité d'enseignement. Si elle ne vous a pas satisfait.e, vos retours sont
+    précieux pour nous aider à nous améliorer. Il n'y a pas de jugement sur vos
+    réponses. Vous pouvez également formuler des commentaires plus spécifiques
+    dans la section "Autres remarques et commentaires", si vous le souhaitez.
 
-    | Option                                                                                                                                                                                                                              | Pas du tout d'accord | Pas d'accord | Plutôt d'accord | Tout à fait d'accord |
-    | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------- | ------------ | --------------- | -------------------- |
-    | Les attentes et les objectifs sont clairement définis                                                                                                                                                                               |                      |              |                 |                      |
-    | Les moments de théorie courts sont adaptés                                                                                                                                                                                          |                      |              |                 |                      |
-    | Les mini-projets sont adaptés à mon niveau                                                                                                                                                                                          |                      |              |                 |                      |
-    | Les exercices sont adaptés à mon niveau                                                                                                                                                                                             |                      |              |                 |                      |
-    | Le temps nécessaire pour réaliser les mini-projets et exercices est adapté                                                                                                                                                          |                      |              |                 |                      |
-    | Les contenus (supports, présentations, consignes, énoncés, etc.) sont compréhensibles et bien rédigés                                                                                                                               |                      |              |                 |                      |
-    | Les contenus (supports, présentations, consignes, énoncés, etc.) me permettent de travailler/réviser de façon autonome                                                                                                              |                      |              |                 |                      |
-    | Les présentations orales sont utiles et permettent de mieux comprendre la matière                                                                                                                                                   |                      |              |                 |                      |
-    | L'unité d'enseignement est variée, dynamique et motivante                                                                                                                                                                           |                      |              |                 |                      |
-    | Le corps enseignant est à l'écoute et répond à mes questions de façon respectueuse                                                                                                                                                  |                      |              |                 |                      |
-    | Les éléments abordés me seront utiles dans ma formation et pour mon futur                                                                                                                                                           |                      |              |                 |                      |
-    | J'aurais plaisir à suivre une unité d'enseignement qui reprend la même méthode d'enseignement que celle-ci (moments de théorie courts, axé sur la pratique, supports de cours qui permettent de travailler de façon autonome, etc.) |                      |              |                 |                      |
-
+- J'ai particulièrement apprécié... (zone de texte)
+- J'ai moins apprécié et je propose... (zone de texte)
 - J'ai eu des difficultés à comprendre les sujets suivants (cases à cocher)
-  - Introduction à PHP
-  - Fonctions
-  - Tableaux et boucles
-  - Formulaires HTML et validation
-  - Base de données et PDO
-  - Sécurité et nettoyage des saisies utilisateurs
-  - Programmation orientée objet
+  - Options :
+    - Introduction à PHP
+    - Fonctions
+    - Tableaux et boucles
+    - Formulaires HTML et validation
+    - Base de données et PDO
+    - Sécurité et nettoyage des saisies utilisateurs
+    - Programmation orientée objet
+  - Description : S'il y a des sujets ou des questions spécifiques, vous pouvez
+    les communiquer dans la section "Autres remarques et commentaires". Cela
+    nous permet de nous préparer pour revenir sur certains sujets si nécessaire.
 - Inscription à un ou des cours d'appui (cases à cocher)
+  - Option : J'aimerais pouvoir avoir un ou des cours d'appui
   - Description : Si nous voyons qu'il y a des personnes intéressées, une date
     sera fixée prochainement avec l'aide de Daniela et une invitation par e-mail
     vous sera envoyée (dans la mesure du possible ; il n'est pas garanti qu'il
     soit possible d'organiser ces cours d'appui).
-  - Option : J'aimerais pouvoir avoir un ou des cours d'appui
-- J'ai particulièrement apprécié... (zone de texte)
-- J'ai moins apprécié et je propose... (zone de texte)
 - Autres remarques et commentaires (zone de texte)
+
+#### Configuration
+
+**Paramètres avancés du formulaire** > **Barre de progression** > **Afficher la
+barre de progression** : Désactivée
 
 ### Message envoyé aux personnes qui étudient avant chaque cours
 
@@ -147,7 +160,39 @@ Voici les supports de cours pour la session d'aujourd'hui : https://github.com/h
 N'hésitez pas à me le faire savoir si vous avez des questions.
 ```
 
-## Context pour des outils AI
+```text
+[ProgServ1 2024-2025] Cours 05 - Base de données et PDO
+
+Bonjour tout le monde,
+
+Voici les supports de cours pour la session d'aujourd'hui : https://github.com/heig-vd-progserv1-course/heig-vd-progserv1-course/tree/main/05-base-de-donnees-et-pdo
+
+N'hésitez pas à me le faire savoir si vous avez des questions.
+```
+
+```text
+[ProgServ1 2024-2025] Cours 06 - Sécurité et nettoyage des saisies utilisateurs
+
+Bonjour tout le monde,
+
+Voici les supports de cours pour la session d'aujourd'hui : https://github.com/heig-vd-progserv1-course/heig-vd-progserv1-course/tree/main/06-securite-et-nettoyage-des-saisies-utilisateurs
+
+N'hésitez pas à me le faire savoir si vous avez des questions.
+```
+
+```text
+[ProgServ1 2024-2025] Cours 07 - Programmation orientée objet
+
+Bonjour tout le monde,
+
+Voici les supports de cours pour la session d'aujourd'hui : https://github.com/heig-vd-progserv1-course/heig-vd-progserv1-course/tree/main/07-programmation-orientee-objet
+
+Le formulaire de feedback est disponible ici : https://framaforms.org/progserv1-2024-2025-feedback-1745321495
+
+N'hésitez pas à me le faire savoir si vous avez des questions.
+```
+
+## Contexte pour des outils AI
 
 ```md
 # Project context and guidelines

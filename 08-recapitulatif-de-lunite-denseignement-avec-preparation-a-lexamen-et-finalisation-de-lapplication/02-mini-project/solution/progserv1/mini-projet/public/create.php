@@ -16,59 +16,24 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $size = $_POST["size"];
     $notes = $_POST["notes"];
 
-    // Par défaut, il n'y a pas d'erreurs
-    $errors = [];
+    // On crée un nouvel objet `Pet`
+    $pet = new Pet(
+        $name,
+        $species,
+        $nickname,
+        $sex,
+        $age,
+        $color,
+        $personalities,
+        $size,
+        $notes
+    );
 
-    // Validation des données
-    if (empty($name)) {
-        // On ajoute un message d'erreur au tableau
-        array_push($errors, "Le nom est obligatoire.");
-    }
+    // On valide les données
+    $errors = $pet->validate();
 
-    if (strlen($name) < 2) {
-        // On ajoute un message d'erreur au tableau
-        array_push($errors, "Le nom doit contenir au moins 2 caractères.");
-    }
-
-    if (empty($species)) {
-        // On ajoute un message d'erreur au tableau
-        array_push($errors, "L'espèce est obligatoire.");
-    }
-
-    if (empty($sex)) {
-        // On ajoute un message d'erreur au tableau
-        array_push($errors, "Le sexe est obligatoire.");
-    }
-
-    if (empty($age)) {
-        // On ajoute un message d'erreur au tableau
-        array_push($errors, "L'âge est obligatoire.");
-    }
-
-    if (!is_numeric($age) || $age < 0) {
-        // On ajoute un message d'erreur au tableau
-        array_push($errors, "L'âge doit être un nombre entier positif.");
-    }
-
-    if (!empty($size) && (!is_numeric($size) || $size < 0)) {
-        // On ajoute un message d'erreur au tableau
-        array_push($errors, "La taille doit être un nombre entier positif.");
-    }
-
-    // Si le formulaire est valide, on ajoute l'animal
+    // S'il n'y a pas d'erreurs, on ajoute l'animal
     if (empty($errors)) {
-        // On crée un nouvel objet `Pet`
-        $pet = new Pet(
-            $name,
-            $species,
-            $nickname,
-            $sex,
-            $age,
-            $color,
-            $personalities,
-            $size,
-            $notes
-        );
 
         // On ajoute l'animal à la base de données
         $petId = $petsManager->addPet($pet);
@@ -84,14 +49,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <html>
 
 <head>
-    <title>Crée un nouvel animal de compagnie | Gestionnaire d'animaux de compagnie</title>
-
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="color-scheme" content="light dark">
-
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
-    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="css/custom.css">
+
+    <title>Crée un nouvel animal de compagnie | Gestionnaire d'animaux de compagnie</title>
 </head>
 
 <body>
@@ -114,49 +78,49 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <?php } ?>
 
         <form action="create.php" method="POST">
-            <label for="name">Nom</label>
+            <label for="name">Nom :</label>
             <input type="text" id="name" name="name" value="<?php if (isset($name)) echo htmlspecialchars($name); ?>" required minlength="2">
 
-            <label for="species">Espèce</label>
+            <label for="species">Espèce :</label>
             <select id="species" name="species" required>
                 <?php foreach (Pet::SPECIES as $key => $value) { ?>
                     <option value="<?= $key ?>" <?php if (isset($species) && $species == $key) echo "selected"; ?>><?= $value ?></option>
                 <?php } ?>
             </select>
 
-            <label for="nickname">Surnom</label>
+            <label for="nickname">Surnom :</label>
             <input type="text" id="nickname" name="nickname" value="<?php if (isset($nickname)) echo htmlspecialchars($nickname); ?>" />
 
             <fieldset>
-                <legend>Sexe</legend>
+                <legend>Sexe :</legend>
 
-                <?php foreach (Pet::SEX as $key => $value) { ?>
+                <?php foreach (Pet::SEXES as $key => $value) { ?>
                     <input type="radio" id="<?= $key ?>" name="sex" value="<?= $key ?>" <?php echo (isset($sex) && $sex == $key) ? 'checked' : ''; ?> required />
                     <label for="<?= $key ?>"><?= $value ?></label>
                 <?php } ?>
             </fieldset>
 
-            <label for="age">Âge</label>
+            <label for="age">Âge :</label>
             <input type="number" id="age" name="age" value="<?php if (isset($age)) echo htmlspecialchars($age); ?>" required min="0" />
 
-            <label for="color">Couleur</label>
+            <label for="color">Couleur :</label>
             <input type="color" id="color" name="color" value="<?php if (isset($color)) echo htmlspecialchars($color); ?>" />
 
             <fieldset>
-                <legend>Personnalité</legend>
+                <legend>Personnalité :</legend>
 
                 <?php foreach (Pet::PERSONALITIES as $key => $value) { ?>
                     <div>
-                        <input type="checkbox" id="<?= $key ?>" name="personalities[]" value="<?= $key ?>" <?php echo (isset($personalities) && in_array($key, $personalities)) ? 'checked' : ''; ?> />
+                        <input type="checkbox" id="<?= $key ?>" name="personalities[]" value="<?= $key ?>" <?= (!empty($personalities) && in_array($key, $personalities)) ? 'checked' : ''; ?> />
                         <label for="<?= $key ?>"><?= $value ?></label>
                     </div>
                 <?php } ?>
             </fieldset>
 
-            <label for="size">Taille</label>
+            <label for="size">Taille :</label>
             <input type="number" id="size" name="size" value="<?php if (isset($size)) echo htmlspecialchars($size); ?>" min="0" step="0.1" />
 
-            <label for="notes">Notes</label>
+            <label for="notes">Notes :</label>
             <textarea id="notes" name="notes" rows="4" cols="50"><?php if (isset($notes)) echo htmlspecialchars($notes); ?></textarea>
 
             <button type="submit">Créer</button>

@@ -1,16 +1,6 @@
 <?php
 
 class Pet {
-    private $name;
-    private $species;
-    private $nickname;
-    private $sex;
-    private $age;
-    private $color;
-    private $personalities;
-    private $size;
-    private $notes;
-
     const SPECIES = [
         'dog' => 'Chien',
         'cat' => 'Chat',
@@ -21,7 +11,7 @@ class Pet {
         'other' => 'Autre'
     ];
 
-    const SEX = [
+    const SEXES = [
         'male' => 'Mâle',
         'female' => 'Femelle'
     ];
@@ -34,6 +24,16 @@ class Pet {
         'scared' => 'Peureux',
         'aggressive' => 'Agressif'
     ];
+
+    private $name;
+    private $species;
+    private $nickname;
+    private $sex;
+    private $age;
+    private $color;
+    private $personalities;
+    private $size;
+    private $notes;
 
     public function __construct(
         $name,
@@ -55,6 +55,48 @@ class Pet {
         $this->personalities = $personalities;
         $this->size = $size;
         $this->notes = $notes;
+    }
+
+    public function validate() {
+        $errors = [];
+
+        if (empty($this->name)) {
+            array_push($errors, "Le nom est obligatoire.");
+        }
+
+        if (strlen($this->name) < 2) {
+            array_push($errors, "Le nom doit contenir au moins 2 caractères.");
+        }
+
+        if (empty($this->species)) {
+            array_push($errors, "L'espèce est obligatoire.");
+        }
+
+        if (!array_key_exists($this->species, self::SPECIES)) {
+            array_push($errors, "L'espèce sélectionnée n'est pas valide.");
+        }
+
+        if (empty($this->sex)) {
+            array_push($errors, "Le sexe est obligatoire.");
+        }
+
+        if (!array_key_exists($this->sex, self::SEXES)) {
+            array_push($errors, "Le sexe sélectionné n'est pas valide.");
+        }
+
+        if (empty($this->age)) {
+            array_push($errors, "L'âge est obligatoire.");
+        }
+
+        if (!is_numeric($this->age) || $this->age < 0) {
+            array_push($errors, "L'âge doit être un nombre entier positif.");
+        }
+
+        if (!empty($this->size) && (!is_numeric($this->size) || $this->size < 0)) {
+            array_push($errors, "La taille doit être un nombre entier positif.");
+        }
+
+        return $errors;
     }
 
     public function getName() {
